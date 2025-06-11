@@ -1,0 +1,83 @@
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import * as apiService from '../services/apiService';
+
+function UserDetailPage() {
+    const { id } = useParams();
+    const navigate = useNavigate();
+
+    const [user, setUser] = useState(null);
+    const [isLoadingUser, setIsLoadingUser] = useState(false);
+    const [fetchUserError, setFetchUserError] = useState('');
+    const [deleteError, setDeleteError] = useState('');
+    const [isDeletingUser, setIsDeletingUser] = useState(false);
+
+    useEffect(() => {
+        const loadUser = async () => {
+            setIsLoadingUser(true);
+            setFetchUserError('');
+            try {
+                const token = localStorage.getItem('token');
+                const data = await apiService.fetchUserById(token, id);
+                setUser(data);
+            } catch (error) {
+                setFetchUserError(error.message);
+            } finally {
+                setIsLoadingUser(false);
+            }
+        };
+        loadUser();
+    }, [id]);
+
+    if (isLoadingUser) return <p>Loading user...</p>;
+    if (fetchUserError) return <p style={{ color: 'red' }}>{fetchUserError}</p>;
+    if (!user) return <p>User not found.</p>;
+
+    const handleDeleteUser = async (e) => {
+        if (!window.confirm('Are you sure you want to delete this user?')) return;
+
+        e.preventDefault();
+        setDeleteError('');
+        setIsDeletingUser(true);
+
+        try {
+            const token = localStorage.getItem('token');
+            await apiService.deleteUser(token, id);
+            navigate('/users');
+        } catch (error) {
+            setDeleteError(error.message);
+        } finally {
+            setIsDeletingUser(false);
+        }
+    };
+
+    return (
+        <div className="page-container">
+            <div className="user-detail-header">
+                <h2>User Details</h2>
+                <button
+                    onClick={handleDeleteUser}
+                    className="delete-button"
+                    disabled={isDeletingUser}
+                >
+                    {isDeletingUser ? 'Deleting...' : 'Delete'}
+                </button>
+            </div>
+
+            {deleteError && <p className="error-message">{deleteError}</p>}
+
+            <div className="user-info-display">
+                <p><strong>Username:</strong> {user.username}</p>
+                <p><strong>Email:</strong> {user.email}</p>
+                <p><strong>Role:</strong> {user.role}</p>
+            </div>
+
+            <div className="button-group">
+                <button onClick={() => navigate(`/users/${user.id}/edit`)}>Edit</button>
+                <button className="button-secondary" onClick={() => navigate('/users')}>Back to Users</button>
+            </div>
+        </div>
+    );
+}
+
+export default UserDetailPage;
