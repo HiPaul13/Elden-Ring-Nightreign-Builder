@@ -172,7 +172,7 @@ export const fetchAllWeapons = async () => {
 };
 
 export const fetchWeaponById = async (token, weaponId) => {
-    const response = await fetch(`http://localhost:3000/api/weapons/${weaponId}`, {
+    const response = await fetch(`${BASE_URL}/weapons/${weaponId}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
