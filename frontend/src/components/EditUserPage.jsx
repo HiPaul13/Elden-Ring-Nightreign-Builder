@@ -10,7 +10,7 @@ function EditUserPage() {
     const [updateUsername, setUpdateUsername] = useState('');
     const [updateEmail, setUpdateEmail] = useState('');
     const [updatePassword, setUpdatePassword] = useState('');
-    const [updateRole, setUpdateRole] = useState('user');
+
 
     const [updateError, setUpdateError] = useState('');
     const [isUpdatingUser, setIsUpdatingUser] = useState(false);
@@ -23,7 +23,6 @@ function EditUserPage() {
 
                 setUpdateUsername(user.username || '');
                 setUpdateEmail(user.email || '');
-                setUpdateRole(user.role || 'user');
             } catch (error) {
                 setUpdateError(error.message);
             }
@@ -43,7 +42,6 @@ function EditUserPage() {
             const updatedData = {
                 username: updateUsername,
                 email: updateEmail,
-                role: updateRole,
             };
 
             if (updatePassword.trim()) {
@@ -102,17 +100,6 @@ function EditUserPage() {
                     />
                 </div>
 
-                <div className="form-field">
-                    <label htmlFor="updateRole">Role:</label>
-                    <select
-                        id="updateRole"
-                        value={updateRole}
-                        onChange={(e) => setUpdateRole(e.target.value)}
-                    >
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
 
                 <div className="button-group">
                     <button type="submit">Update User</button>

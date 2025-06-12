@@ -21,7 +21,7 @@ let getUser = (id) => new Promise((resolve, reject) => {
 // Update a user (without password)
 let updateUser = (userData) => new Promise((resolve, reject) => {
     const sql = "UPDATE users SET " +
-        "username = ?, email = ?, role = ? " +
+        "username = ?, email = ? " +
         "WHERE id = ?";
 
     db.query(sql, [userData.username, userData.email, userData.role, parseInt(userData.id)], (err, result) => {

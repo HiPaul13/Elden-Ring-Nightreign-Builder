@@ -1,5 +1,6 @@
 // Import the jsonwebtoken library to work with JWT tokens
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 // Load the secret key used for signing tokens from environment variables
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
@@ -7,21 +8,6 @@ const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 // Import bcrypt for securely comparing hashed passwords
 const bcrypt = require('bcrypt');
 
-/**
- * Asynchronously checks if a plain password matches a hashed password.
- * @param {string} password - Plain text password.
- * @param {string} hash - Hashed password from the database.
- * @returns {Promise<boolean>} - True if passwords match, false otherwise.
- */
-
-
-/**
- * Authenticates a user based on provided credentials.
- * If successful, sets a JWT as a cookie and redirects to the user's profile.
- * @param {Object} param0 - Contains username (email) and password.
- * @param {Array} users - List of user objects from the database.
- * @param {Object} res - Express response object.
- */
 /**
 function authenticateUser({email, password}, users, res) {
     // Find user with matching email
@@ -88,27 +74,24 @@ async function authenticateUser({ email, password }, users, res) {
  * @param {Function} next - Express next middleware function.
  */
 function authenticateJWT(req, res, next) {
-    const token = req.cookies.accessToken;
 
-    if (token) {
-        // Verify the token using the secret key
-        jwt.verify(token, ACCESS_TOKEN_SECRET, (err, user) => {   // erster parameter (err) wenn nicht verifiziert & und 2. parameter (user) wenn verifiziert
-            if (err) {
-                // Token invalid or expired
-                res.status(403); // Forbidden
-                return next(); // Continue to next middleware, possibly rendering error page
-            }
-
-            // Token is valid, attach user info to request
-            console.log(user);
-            req.user = user; // wir speichern den payload (user) im req.user
-            next();
-        });
-    } else {
-        // No token provided
-        res.sendStatus(401); // Unauthorized
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    console.log("auth")
+    if (!token) {
+        return res.status(401).json({ message: 'No token provided' });
+    }
+    try {
+        let decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        req.user = decoded;
+        console.log(req.user);
+        return next();
+    } catch (err) {
+        res.status(401);
+        next(err);
     }
 }
+
 
 async function checkPassword(password, hash) {
     let pw = await bcrypt.compare(password, hash);

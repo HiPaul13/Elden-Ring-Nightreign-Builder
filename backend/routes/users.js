@@ -3,7 +3,6 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const authenticationService = require('../services/authentication');
 
-
 router.use(authenticationService.authenticateJWT);
 
 // GET all users
@@ -21,5 +20,6 @@ router.put('/:id', userController.updateUser); // changed from POST
 
 // DELETE user
 router.delete('/:id', userController.deleteUser); // changed from POST /delete
+
 
 module.exports = router;
