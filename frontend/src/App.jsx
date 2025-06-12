@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import CreateUserPage from "./components/CreateUserPage";
 import UserDetailPage from "./components/UserDetailPage.jsx";
 import EditUserPage from "./components/EditUserPage";
+import WeaponsPage from "./components/WeaponsPage.jsx";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
 
             <Route path="/" element={<HomePage/>}></Route>
             <Route path="/login" element={<LoginPage/>}></Route>
+            <Route path="/weapons" element={<WeaponsPage/>}></Route>
 
             {/* protected Routes */}
             <Route path="/users" element={

@@ -120,3 +120,19 @@ export const deleteUser = async (token, id) => {
 
     return await response.json(); // Return deleted user confirmation
 };
+
+export const fetchWeapons = async (token) => {
+    const response = await fetch(`${BASE_URL}/weapons`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`, // Send token for authentication //header, payload, Signature(Secret)
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch users');
+    }
+
+    return await response.json(); // Return array of user objects
+};
+

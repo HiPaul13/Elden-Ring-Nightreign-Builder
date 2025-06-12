@@ -8,7 +8,7 @@ Notes For The next Day: I want to connect Frontend and backend and start into th
 
 Mi.11.Juni
 
-What I did:
+What I did: 
 Biggest Learning:
 Biggest Failure:
 Notes For The next Day:

@@ -20,16 +20,10 @@ const path = require('path');                  // Node.js path utility
 // Serve static files from the 'public' directory (e.g., CSS, images)
 app.use(express.static('public'));
 
-/**
-// Set up EJS view engine and views directory
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-*/
 // Middleware for parsing cookies // Attaches cookies object to request //parse cookies from HTTP Headers
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
-// Middleware for parsing form data and JSON
 // Helps express to read the body of incoming HTTP requests/ ecample req.body.username
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());                         // Parse JSON bodies
@@ -38,11 +32,11 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded form da
 // Route modules
 const indexRouter = require('./routes/index');   // Routes for login, register, chat, etc.
 const usersRouter = require('./routes/users');   // Routes for user CRUD
-
+const weaponsRouter = require('./routes/weapons')
 // Register routers for route groups
 app.use('/api/auth', indexRouter);        // Base route handler ("/")
 app.use('/api/users', usersRouter);  // User-related route handler ("/users")
-
+app.use('/api/weapons', weaponsRouter);
 // Error-handling middleware
 function errorHandler(err, req, res, next) {
     console.error('❌ Error:', err);
@@ -52,11 +46,6 @@ function errorHandler(err, req, res, next) {
 }
 
 app.use(errorHandler);
-
-// Optional: basic GET route (can be removed since '/' is already handled by indexRouter)
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
 
 // Start the Express server
 app.listen(port, () => {
