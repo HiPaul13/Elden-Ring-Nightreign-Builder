@@ -9,7 +9,17 @@ let getWeapons = () => new Promise((resolve, reject) => {
     });
 });
 
+const getWeaponById = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM weapons WHERE id = ?';
+        db.query(sql, [id], (err, results) => {
+            if (err) return reject(err);
+            resolve(results[0]); // return a single weapon
+        });
+    });
+};
 
 module.exports = {
-    getWeapons
+    getWeapons,
+    getWeaponById
 };

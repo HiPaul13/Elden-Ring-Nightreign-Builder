@@ -7,6 +7,9 @@ import CreateUserPage from "./components/CreateUserPage";
 import UserDetailPage from "./components/UserDetailPage.jsx";
 import EditUserPage from "./components/EditUserPage";
 import WeaponsPage from "./components/WeaponsPage.jsx";
+import SelectWeaponPage from './components/SelectWeaponPage';
+import CreateWeaponBuild from "./components/CreateWeaponBuild";
+
 
 function App() {
 
@@ -17,6 +20,24 @@ function App() {
             <Route path="/" element={<HomePage/>}></Route>
             <Route path="/login" element={<LoginPage/>}></Route>
             <Route path="/weapons" element={<WeaponsPage/>}></Route>
+
+
+
+
+
+            <Route path="/users/:id/createBuild" element={
+                <ProtectedRoute>
+                    <CreateWeaponBuild />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/users/:id/creatingBuild/:buildId/weapons" element={
+                <ProtectedRoute>
+                    <SelectWeaponPage />
+                </ProtectedRoute>
+            } />
+
+
 
             {/* protected Routes */}
             <Route path="/users" element={

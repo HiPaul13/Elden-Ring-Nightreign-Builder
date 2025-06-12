@@ -33,10 +33,14 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded form da
 const indexRouter = require('./routes/index');   // Routes for login, register, chat, etc.
 const usersRouter = require('./routes/users');   // Routes for user CRUD
 const weaponsRouter = require('./routes/weapons')
+const buildsRouter = require('./routes/builds');
+
+
 // Register routers for route groups
 app.use('/api/auth', indexRouter);        // Base route handler ("/")
 app.use('/api/users', usersRouter);  // User-related route handler ("/users")
 app.use('/api/weapons', weaponsRouter);
+app.use('/api/builds', buildsRouter);
 // Error-handling middleware
 function errorHandler(err, req, res, next) {
     console.error('❌ Error:', err);
