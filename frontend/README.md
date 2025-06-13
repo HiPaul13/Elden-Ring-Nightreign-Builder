@@ -25,10 +25,10 @@ Notes For The next Day: Finally get something done in the backend hopefully
 
 Fr.13.Juni
 
-What I did: I managed to implement that the user can create a build choose weapons and it creates a build in the db, but it doesnt update the weapon_id i still need to fix that
+What I did: I managed to implement that the user can create a build choose weapons and it creates a build in the db, I can give the Build a Name, Character and the picture of the Character. I also can add it to MyBuilds.
 Biggest Learning: getting faster in the implementation of things
 Biggest Failure: No failure today everything worked so far.
-Notes For The next Day: --
+Notes For The next Day: For the next day i want to implement the Browse Page and where people can like builds.
 
 
 Sa.14.Juni
