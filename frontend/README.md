@@ -25,10 +25,10 @@ Notes For The next Day: Finally get something done in the backend hopefully
 
 Fr.13.Juni
 
-What I did:
-Biggest Learning:
-Biggest Failure:
-Notes For The next Day:
+What I did: I managed to implement that the user can create a build choose weapons and it creates a build in the db, but it doesnt update the weapon_id i still need to fix that
+Biggest Learning: getting faster in the implementation of things
+Biggest Failure: No failure today everything worked so far.
+Notes For The next Day: --
 
 
 Sa.14.Juni

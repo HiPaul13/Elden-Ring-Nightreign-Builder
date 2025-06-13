@@ -6,7 +6,13 @@ const authenticationService = require("../services/authentication");
 
 router.use(authenticationService.authenticateJWT);
 
+router.get('/user/:userId', buildController.getBuildsByUser);
+
+
 router.post('/', buildController.createBuild);
+
+router.put('/:buildId', buildController.updateBuildWeapons);
+
 
 
 module.exports = router;

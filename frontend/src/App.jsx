@@ -10,6 +10,7 @@ import WeaponsPage from "./components/WeaponsPage.jsx";
 import SelectWeaponPage from './components/SelectWeaponPage';
 import CreateWeaponBuild from "./components/CreateWeaponBuild";
 import NavigateToNewBuild from './components/NavigateToNewBuild';
+import MyBuildsPage from './components/MyBuildsPage';
 
 
 function App() {
@@ -23,7 +24,11 @@ function App() {
             <Route path="/weapons" element={<WeaponsPage/>}></Route>
 
 
-
+            <Route path="/users/:id/myBuilds" element={
+                <ProtectedRoute>
+                    <MyBuildsPage />
+                </ProtectedRoute>
+            } />
 
 
             <Route path="/users/:id/createBuild/:buildId" element={

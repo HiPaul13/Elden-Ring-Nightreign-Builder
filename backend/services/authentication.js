@@ -8,29 +8,6 @@ const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 // Import bcrypt for securely comparing hashed passwords
 const bcrypt = require('bcrypt');
 
-/**
-function authenticateUser({email, password}, users, res) {
-    // Find user with matching email
-    const user = users.find(u => u.email === email);
-    console.log(user);
-
-    // Compare passwords using checkPassword (returns a Promise!)
-    if (user && checkPassword(password, user.password)) {
-        // Create JWT token with user info and a 1-hour expiration
-        //jwt token header, payload, signature (header + payload + secret encrypted)
-        const accessToken = jwt.sign({ id: user.id, username: user.username }, ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
-
-        // Store token in a cookie
-        res.cookie('accessToken', accessToken);
-
-        // Redirect to the user's profile
-        res.redirect('/users/' + user.id);
-    } else {
-        // Invalid credentials
-        res.send('Username or password incorrect');
-    }
-}
-*/
 async function authenticateUser({ email, password }, users, res) {
     const user = users.find(u => u.email === email);
 

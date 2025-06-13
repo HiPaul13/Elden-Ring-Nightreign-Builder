@@ -39,6 +39,27 @@ function CreateWeaponBuild() {
         navigate(`/users/${id}/creatingBuild/${buildId}/weapons`);
     };
 
+    const handleSaveBuild = async () => {
+        const token = localStorage.getItem('token');
+        const weaponData = {};
+
+        for (let i = 0; i < 6; i++) {
+            const weaponId = localStorage.getItem(`build-${buildId}-slot-${i}`);
+            if (weaponId) {
+                weaponData[`weapon_${i + 1}_id`] = weaponId;
+            }
+        }
+
+        try {
+            await apiService.updateBuild(token, buildId, weaponData);
+            alert('Build saved successfully!');
+            navigate(`/users/${id}/myBuilds`); // Redirect to user page or builds list
+        } catch (err) {
+            console.error(err);
+            alert('Failed to save build.');
+        }
+    };
+
     return (
         <div className="page-container">
             <h2>Create Your Weapon Build</h2>
@@ -55,6 +76,8 @@ function CreateWeaponBuild() {
                         )}
                     </div>
                 ))}
+                <button onClick={handleSaveBuild}>Save Build</button>
+
             </div>
         </div>
     );

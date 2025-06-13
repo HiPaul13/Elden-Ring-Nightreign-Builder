@@ -171,6 +171,35 @@ export const createBuild = async (token, user_id) => {
     return await response.json(); // returns { buildId }
 };
 
+export const updateBuild = async (token, buildId, weaponData) => {
+    const response = await fetch(`${BASE_URL}/builds/${buildId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(weaponData),
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to update build');
+    }
+
+    return await response.json();
+};
+
+export const fetchUserBuilds = async (token, userId) => {
+    const response = await fetch(`${BASE_URL}/builds/user/${userId}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    if (!response.ok) throw new Error('Failed to fetch builds');
+    return await response.json();
+};
+
+
 export const fetchAllWeapons = async () => {
     const response = await fetch(`${BASE_URL}/weapons`); // Adjust if needed
     if (!response.ok) throw new Error('Failed to fetch weapons');
