@@ -9,6 +9,7 @@ import EditUserPage from "./components/EditUserPage";
 import WeaponsPage from "./components/WeaponsPage.jsx";
 import SelectWeaponPage from './components/SelectWeaponPage';
 import CreateWeaponBuild from "./components/CreateWeaponBuild";
+import NavigateToNewBuild from './components/NavigateToNewBuild';
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
 
 
 
-            <Route path="/users/:id/createBuild" element={
+            <Route path="/users/:id/createBuild/:buildId" element={
                 <ProtectedRoute>
                     <CreateWeaponBuild />
                 </ProtectedRoute>
@@ -34,6 +35,12 @@ function App() {
             <Route path="/users/:id/creatingBuild/:buildId/weapons" element={
                 <ProtectedRoute>
                     <SelectWeaponPage />
+                </ProtectedRoute>
+            } />
+
+            <Route path="/users/:id/createBuild" element={
+                <ProtectedRoute>
+                    <NavigateToNewBuild />
                 </ProtectedRoute>
             } />
 

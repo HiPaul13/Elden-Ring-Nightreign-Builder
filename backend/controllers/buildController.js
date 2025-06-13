@@ -1,20 +1,26 @@
-const db = require('../services/database').config;
+const buildModel = require('../models/buildModel');
 
-const createBuild = (req, res) => {
-    const { name } = req.body;
-    const userId = req.user?.id; // assuming user info is attached via middleware
+/**
+ * Controller to create a new build for a user
+ */
+async function createBuild(req, res) {
 
-    if (!userId) {
-        return res.status(401).json({ message: 'Unauthorized' });
+
+    try {
+        const { user_id } = req.body;
+        const newBuild = await buildModel.createBuild(user_id);
+        console.log(newBuild);
+        res.status(201).json(newBuild);
+    } catch (err) {
+        console.error('Error creating build:', err);
+        res.status(500).json({ message: 'Failed to create build' });
     }
+}
 
-    const sql = `INSERT INTO builds (user_id, name) VALUES (?, ?)`;
+/**
+ * Controller to fetch all builds for a user (optional)
+ */
 
-    db.query(sql, [userId, name || 'Unnamed Build'], (err, result) => {
-        if (err) return res.status(500).json({ message: 'Database error', error: err });
-
-        res.status(201).json({ buildId: result.insertId });
-    });
+module.exports = {
+    createBuild,
 };
-
-module.exports = { createBuild };

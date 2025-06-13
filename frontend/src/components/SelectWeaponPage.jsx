@@ -37,7 +37,7 @@ function SelectWeaponPage() {
         localStorage.setItem(`build-${buildId}-slot-${slot}`, weaponId);
 
         // Redirect back to the create build page
-        navigate(`/users/${id}/createBuild`);
+        navigate(`/users/${id}/createBuild/${buildId}`);
     };
 
 

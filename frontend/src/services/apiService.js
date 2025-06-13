@@ -137,24 +137,30 @@ export const fetchWeapons = async (token) => {
 };
 
 // In apiService.js
-export const fetchWeaponById = async (weaponId) => {
-    const response = await fetch(`${BASE_URL}/weapons/${weaponId}`);
+export const fetchWeaponById = async (token, weaponId) => {
+    const response = await fetch(`${BASE_URL}/weapons/${weaponId}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
 
     if (!response.ok) {
-        throw new Error("Failed to fetch weapon by ID");
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to fetch weapon');
     }
 
     return await response.json();
 };
 
-export const createBuild = async (token, name) => {
+export const createBuild = async (token, user_id) => {
     const response = await fetch(`${BASE_URL}/builds`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ user_id }),
     });
 
     if (!response.ok) {
@@ -171,19 +177,5 @@ export const fetchAllWeapons = async () => {
     return await response.json();
 };
 
-export const fetchWeaponById = async (token, weaponId) => {
-    const response = await fetch(`${BASE_URL}/weapons/${weaponId}`, {
-        method: 'GET',
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
 
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to fetch weapon');
-    }
-
-    return await response.json();
-};
 
