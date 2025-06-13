@@ -171,14 +171,14 @@ export const createBuild = async (token, user_id) => {
     return await response.json(); // returns { buildId }
 };
 
-export const updateBuild = async (token, buildId, weaponData) => {
+export const updateBuild = async (token, buildId, buildData) => {
     const response = await fetch(`${BASE_URL}/builds/${buildId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(weaponData),
+        body: JSON.stringify(buildData),
     });
 
     if (!response.ok) {

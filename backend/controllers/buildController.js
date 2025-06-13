@@ -6,7 +6,6 @@ const weaponModel = require("../models/weaponModel");
  */
 async function createBuild(req, res) {
 
-
     try {
         const { user_id } = req.body;
         const newBuild = await buildModel.createBuild(user_id);

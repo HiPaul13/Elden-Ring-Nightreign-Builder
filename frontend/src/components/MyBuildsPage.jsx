@@ -36,31 +36,26 @@ function MyBuildsPage() {
                 <p>You haven't saved any builds yet.</p>
             ) : (
                 <div className="build-list">
-                    {builds.map(build => (
+                    {builds.map((build) => (
                         <div key={build.id} className="build-card">
-                            <h4>Build #{build.id}</h4>
-                            <div className="weapon-preview-grid">
-                                {[...Array(6)].map((_, index) => {
-                                    const weapon = build[`weapon_${index + 1}`];
-                                    return (
-                                        <div key={index} className="weapon-slot">
-                                            {weapon ? (
-                                                <>
-                                                    <img src={weapon.image_url} alt={weapon.name} />
-                                                    <p>{weapon.name}</p>
-                                                </>
-                                            ) : (
-                                                <p>Empty</p>
-                                            )}
-                                        </div>
-                                    );
-                                })}
+                            <h3>{build.name || 'Unnamed Build'}</h3> {/* Display build name */}
+                            <div className="weapon-preview">
+                                {build.weapons.map((weapon, idx) => (
+                                    <div key={idx} className="weapon-slot">
+                                        {weapon ? (
+                                            <>
+                                                <img src={weapon.image_url} alt={weapon.name} />
+                                                <p>{weapon.name}</p>
+                                            </>
+                                        ) : (
+                                            <p>Empty</p>
+                                        )}
+                                    </div>
+                                ))}
                             </div>
-                            <button onClick={() => navigate(`/users/${id}/createBuild/${build.id}`)}>
-                                Edit Build
-                            </button>
                         </div>
                     ))}
+
                 </div>
             )}
         </div>
