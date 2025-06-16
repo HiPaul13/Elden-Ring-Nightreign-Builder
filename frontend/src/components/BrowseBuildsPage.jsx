@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import * as apiService from '../services/apiService';
 import { Link } from 'react-router-dom';
-import '../styles/MyBuildsPage.css'; // reuse for styling
+import '../styles/BrowseBuildsPage.css'; // reuse for styling
+import BuildCard from './BuildCard';
+import { useNavigate } from 'react-router-dom';
 
 function BrowseBuildsPage() {
     const [builds, setBuilds] = useState([]);
@@ -9,6 +11,7 @@ function BrowseBuildsPage() {
     const [error, setError] = useState('');
     const [characterFilter, setCharacterFilter] = useState('');
     const [sortByLikes, setSortByLikes] = useState(false);
+    const navigate = useNavigate();
 
     const hasLikedBuild = (buildId) => {
         return !!localStorage.getItem(`liked-build-${buildId}`);
@@ -50,7 +53,7 @@ function BrowseBuildsPage() {
 
     return (
         <div className="page-container">
-            <h2>Browse Public Builds</h2>
+            <h2>Browse Builds</h2>
 
             <div style={{ marginBottom: '1rem' }}>
                 <label>Filter by Character: </label>
@@ -79,46 +82,30 @@ function BrowseBuildsPage() {
             ) : builds.length === 0 ? (
                 <p>No builds found.</p>
             ) : (
-                <div className="build-list">
+                <div className="build-grid">
                     {builds.map((build) => (
-                        <div key={build.id} className="build-card">
-                            <Link
-                                to={`/builds/${build.id}`}
-                                style={{ textDecoration: 'none', color: 'inherit' }}
-                            >
-                                <h3>{build.name || 'Unnamed Build'}</h3>
-                                <p><strong>Character:</strong> {build.character}</p>
-                                <p><strong>Likes:</strong> {build.likes}</p>
-
-                                <div className="weapon-preview">
-                                    {build.weapons.map((weapon, idx) => (
-                                        <div key={idx} className="weapon-slot">
-                                            <img src={weapon.image_url} alt={weapon.name} />
-                                            <p>{weapon.name}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </Link>
-
-                            {/* ✅ This works now */}
-                            <button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    handleLike(build.id);
-                                }}
-                                disabled={hasLikedBuild(build.id)}
-                                className={hasLikedBuild(build.id) ? 'liked-button' : ''}
-                            >
-                                {hasLikedBuild(build.id) ? '✅ Liked' : '👍 Like This Build'}
-                            </button>
-
-
-                        </div>
-
+                        <BuildCard
+                            key={build.id}
+                            build={build}
+                            size="small"
+                            onClick={() => navigate(`/builds/${build.id}`)}
+                            likeButton={
+                                <button
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        handleLike(build.id);
+                                    }}
+                                    disabled={hasLikedBuild(build.id)}
+                                    className={hasLikedBuild(build.id) ? 'liked-button' : 'like-button'}
+                                >
+                                    {hasLikedBuild(build.id) ? '✅ Liked' : `❤️ ${build.likes}`}
+                                </button>
+                            }
+                        />
                     ))}
-
                 </div>
+
 
             )}
         </div>

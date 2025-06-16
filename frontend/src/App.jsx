@@ -6,7 +6,6 @@ import LoginPage from './components/LoginPage';
 import UsersPage from './components/UsersPage';
 import CreateUserPage from './components/CreateUserPage';
 import EditUserPage from './components/EditUserPage';
-import UserDetailPage from './components/UserDetailPage';
 import WeaponsPage from './components/WeaponsPage';
 import SelectWeaponPage from './components/SelectWeaponPage';
 import CreateWeaponBuild from './components/CreateWeaponBuild';
@@ -15,6 +14,7 @@ import MyBuildsPage from './components/MyBuildsPage';
 import MyBuildDetailPage from './components/MyBuildDetailPage';
 import BrowseBuildsPage from './components/BrowseBuildsPage';
 import BuildDetailPage from './components/BuildDetailPage';
+import UserProfilePage from "./components/UserProfilePage.jsx";
 
 function App() {
     return (
@@ -39,7 +39,7 @@ function App() {
                     <Route path="weapons" element={<WeaponsPage />} />
                     <Route path="users" element={<UsersPage />} />
                     <Route path="users/new" element={<CreateUserPage />} />
-                    <Route path="users/:id" element={<UserDetailPage />} />
+                    <Route path="users/:id" element={<UserProfilePage />} />
                     <Route path="users/:id/edit" element={<EditUserPage />} />
                     <Route path="users/:id/myBuilds" element={<MyBuildsPage />} />
                     <Route path="users/:id/myBuilds/:buildId" element={<MyBuildDetailPage />} />

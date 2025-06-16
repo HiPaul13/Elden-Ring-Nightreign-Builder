@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import * as apiService from '../services/apiService';
-import { Link } from 'react-router-dom';
-import '../styles/MyBuildsPage.css'; // Optional for styling
+import '../styles/MyBuildsPage.css';
+import BuildCard from './BuildCard.jsx';
 
 function MyBuildsPage() {
-    const { id } = useParams(); // User ID from route
+    const { id } = useParams();
+    const navigate = useNavigate();
     const [builds, setBuilds] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -30,45 +31,20 @@ function MyBuildsPage() {
     if (error) return <p style={{ color: 'red' }}>{error}</p>;
 
     return (
-        <div className="page-container">
+        <div className="my-builds-wrapper">
             <h2>My Weapon Builds</h2>
             {builds.length === 0 ? (
                 <p>You haven't saved any builds yet.</p>
             ) : (
-                <div className="build-list">
+                <div className="build-grid">
                     {builds.map((build) => (
-                        <div key={build.id} className="build-card">
-                            <div className="build-info">
-                                <h3>{build.name || 'Unnamed Build'}</h3>
-
-                                <div className="weapon-preview">
-                                    {build.weapons.map((weapon, idx) => (
-                                        <div key={idx} className="weapon-slot">
-                                            {weapon ? (
-                                                <>
-                                                    <img src={weapon.image_url} alt={weapon.name} />
-                                                    <p>{weapon.name}</p>
-                                                </>
-                                            ) : (
-                                                <p>Empty</p>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="build-actions">
-                                <Link
-                                    to={`/users/${id}/myBuilds/${build.id}`}
-                                    className="view-details-button"
-                                >
-                                    🔍 View Details
-                                </Link>
-                            </div>
-                        </div>
-
+                        <BuildCard
+                            key={build.id}
+                            build={build}
+                            size="small"
+                            onClick={() => navigate(`/users/${id}/myBuilds/${build.id}`)}
+                        />
                     ))}
-
                 </div>
             )}
         </div>

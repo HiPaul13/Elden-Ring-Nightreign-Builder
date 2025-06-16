@@ -1,75 +1,33 @@
-/* src/styles/MyBuildsPage.css */
-
-.page-container {
-    padding: 2rem;
-    max-width: 900px;
+.my-builds-wrapper {
+    width: 100%;
+    max-width: 1600px;
     margin: 0 auto;
+    padding: 2rem;
 }
+
 
 h2 {
     text-align: center;
     margin-bottom: 2rem;
+    color: #646cff;
+    font-size: 2rem;
 }
 
-.builds-grid {
+.build-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-.build-card {
-    background-color: #1e1e1e;
-    border: 1px solid #444;
-    border-radius: 10px;
-    padding: 1rem;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    color: #fff;
-    text-align: center;
-}
-
-.build-card h4 {
-    margin-bottom: 1rem;
-}
-
-.weapon-preview {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-button.liked-button {
-    background-color: #d1e7dd;
-    color: #155724;
-    cursor: not-allowed;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 20px;
+    width: 100%;             /* Let it scale naturally */
+    max-width: 1600px;       /* Optional: allows up to 2 full cards */
+    margin: 0 auto;          /* Center it */
 }
 
 
-.weapon-preview img {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    border-radius: 6px;
-    background-color: #2c2c2c;
-    padding: 3px;
-    border: 1px solid #555;
+@media (max-width: 950px) {
+    .build-grid {
+        max-width: 600px; /* forces 1 column earlier */
+    }
 }
 
-.empty-slot {
-    width: 50px;
-    height: 50px;
-    background-color: #333;
-    border: 1px dashed #777;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #aaa;
-    font-size: 20px;
-    border-radius: 6px;
-}
 
-.error {
-    color: red;
-    text-align: center;
-    margin-top: 2rem;
-}
+

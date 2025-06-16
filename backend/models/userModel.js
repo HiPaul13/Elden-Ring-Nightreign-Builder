@@ -12,7 +12,8 @@ let getUsers = () => new Promise((resolve, reject) => {
 
 // Get one user by ID
 let getUser = (id) => new Promise((resolve, reject) => {
-    db.query("SELECT id, username, email, role, created_at FROM users WHERE id = ?", [id], (err, result) => {
+    db.query("SELECT id, username, email, role, created_at, profile_picture FROM users WHERE id = ?",
+        [id], (err, result) => {
         if (err) return reject(err);
         resolve(result[0]);
     });
@@ -20,14 +21,16 @@ let getUser = (id) => new Promise((resolve, reject) => {
 
 // Update a user (without password)
 let updateUser = (userData) => new Promise((resolve, reject) => {
-    const sql = "UPDATE users SET " +
-        "username = ?, email = ? " +
-        "WHERE id = ?";
+    const sql = "UPDATE users SET username = ?, email = ?, profile_picture = ? WHERE id = ?";
 
-    db.query(sql, [userData.username, userData.email, userData.role, parseInt(userData.id)], (err, result) => {
-        if (err) return reject(err);
-        resolve(result);
-    });
+    db.query(
+        sql,
+        [userData.username, userData.email, userData.profile_picture, parseInt(userData.id)],
+        (err, result) => {
+            if (err) return reject(err);
+            resolve(result);
+        }
+    );
 });
 
 // Add a new user

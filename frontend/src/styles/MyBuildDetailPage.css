@@ -1,0 +1,50 @@
+
+
+.detail-page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.detail-page-wrapper h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: white;
+    text-align: center;
+}
+
+
+.share-icon {
+    width: 15vh;
+    height: auto;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.2s ease;
+}
+
+.share-icon:hover {
+    transform: scale(1.05);
+}
+
+.build-card-with-share {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.share-button-inside-card {
+    position: absolute;
+    bottom: -80px;
+    right: -80px;
+    width: 12vh;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.share-button-inside-card:hover {
+    transform: scale(1.05);
+}
