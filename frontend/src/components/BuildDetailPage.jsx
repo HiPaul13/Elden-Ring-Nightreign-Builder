@@ -8,6 +8,8 @@ function BuildDetailPage() {
     const [build, setBuild] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const hasLikedBuild = (id) => !!localStorage.getItem(`liked-build-${id}`);
+
 
     const fetchBuild = async () => {
         try {
@@ -22,13 +24,17 @@ function BuildDetailPage() {
     };
 
     const handleLike = async () => {
+        if (hasLikedBuild(build.id)) return;
+
         try {
-            await apiService.likeBuild(buildId);
-            fetchBuild(); // reload updated like count
+            await apiService.likeBuild(build.id);
+            localStorage.setItem(`liked-build-${build.id}`, 'true');
+            fetchBuild(); // refresh likes
         } catch {
             alert('Failed to like this build');
         }
     };
+
 
     useEffect(() => {
         fetchBuild();
@@ -52,7 +58,14 @@ function BuildDetailPage() {
                 ))}
             </div>
 
-            <button onClick={handleLike}>👍 Like This Build</button>
+            <button
+                onClick={() => handleLike()}
+                disabled={hasLikedBuild(build.id)}
+                className={hasLikedBuild(build.id) ? 'liked-button' : ''}
+            >
+                {hasLikedBuild(build.id) ? '✅ Liked' : '👍 Like This Build'}
+            </button>
+
         </div>
     );
 }

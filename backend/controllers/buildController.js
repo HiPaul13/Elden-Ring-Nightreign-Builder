@@ -73,6 +73,21 @@ const getBuildById = async (req, res) => {
     }
 };
 
+const shareBuild = async (req, res) => {
+    const buildId = req.params.buildId;
+    const userId = req.user.id;
+
+    try {
+        const result = await buildModel.shareBuild(buildId, userId);
+        if (!result.shared) {
+            return res.status(403).json({ message: 'Unauthorized or build not found' });
+        }
+        res.json({ message: 'Build shared successfully' });
+    } catch (err) {
+        res.status(500).json({ message: 'Failed to share build' });
+    }
+};
+
 
 
 
@@ -83,4 +98,5 @@ module.exports = {
     likeBuild,
     getPublicBuilds,
     getBuildById,
+    shareBuild,
 };

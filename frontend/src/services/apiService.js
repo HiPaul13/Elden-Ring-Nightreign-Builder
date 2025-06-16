@@ -235,5 +235,16 @@ export const fetchBuildById = async (buildId) => {
     return await response.json();
 };
 
+export const shareBuild = async (token, buildId) => {
+    const response = await fetch(`http://localhost:3000/api/builds/${buildId}/share`, {
+        method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    if (!response.ok) throw new Error('Failed to share build');
+    return await response.json();
+};
 
 

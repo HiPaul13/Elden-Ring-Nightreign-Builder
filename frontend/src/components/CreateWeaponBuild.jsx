@@ -25,15 +25,16 @@ function CreateWeaponBuild() {
 
 
     useEffect(() => {
-        async function loadWeapons() {
+        async function loadBuild() {
             const newSelected = [];
             const token = localStorage.getItem('token');
 
+            // Load weapons
             for (let i = 0; i < 6; i++) {
                 const weaponId = localStorage.getItem(`build-${buildId}-slot-${i}`);
                 if (weaponId) {
                     try {
-                        const weapon = await apiService.fetchWeaponById( token, weaponId);
+                        const weapon = await apiService.fetchWeaponById(token, weaponId);
                         newSelected.push(weapon);
                     } catch {
                         newSelected.push(null);
@@ -43,9 +44,17 @@ function CreateWeaponBuild() {
                 }
             }
             setSelectedWeapons(newSelected);
+
+            // Load name and character
+            const savedName = localStorage.getItem(`build-${buildId}-name`);
+            const savedChar = localStorage.getItem(`build-${buildId}-character`);
+            if (savedName) setBuildName(savedName);
+            if (savedChar) setCharacter(savedChar);
         }
-        loadWeapons();
-    }, [id]);
+
+        loadBuild();
+    }, [buildId]);
+
 
     const handleSlotClick = (index) => {
         localStorage.setItem(`build-${buildId}-selected-slot`, index);
@@ -87,7 +96,10 @@ function CreateWeaponBuild() {
                     type="text"
                     placeholder="Enter build name"
                     value={buildName}
-                    onChange={(e) => setBuildName(e.target.value)}
+                    onChange={(e) => {
+                        setBuildName(e.target.value);
+                        localStorage.setItem(`build-${buildId}-name`, e.target.value);
+                    }}
                     required
                 />
 
@@ -96,7 +108,10 @@ function CreateWeaponBuild() {
                     <select
                         id="character"
                         value={character}
-                        onChange={(e) => setCharacter(e.target.value)}
+                        onChange={(e) => {
+                            setCharacter(e.target.value);
+                            localStorage.setItem(`build-${buildId}-character`, e.target.value);
+                        }}
                         required
                     >
                         <option value="">-- Choose --</option>

@@ -94,7 +94,8 @@ const getBuildsWithWeaponsByUser = (userId) => new Promise((resolve, reject) => 
 
 const getPublicBuilds = (characterFilter, sortByLikes) => new Promise((resolve, reject) => {
     let sql = `
-        SELECT b.*, 
+        SELECT b.*,
+               u.username AS creator_username,
             w1.name AS w1_name, w1.image_url AS w1_image,
             w2.name AS w2_name, w2.image_url AS w2_image,
             w3.name AS w3_name, w3.image_url AS w3_image,
@@ -102,6 +103,7 @@ const getPublicBuilds = (characterFilter, sortByLikes) => new Promise((resolve, 
             w5.name AS w5_name, w5.image_url AS w5_image,
             w6.name AS w6_name, w6.image_url AS w6_image
         FROM builds b
+        LEFT JOIN users u ON b.user_id = u.id
         LEFT JOIN weapons w1 ON b.weapon_1_id = w1.id
         LEFT JOIN weapons w2 ON b.weapon_2_id = w2.id
         LEFT JOIN weapons w3 ON b.weapon_3_id = w3.id
@@ -144,6 +146,7 @@ const getPublicBuilds = (characterFilter, sortByLikes) => new Promise((resolve, 
                 name: row.name,
                 character: row.character,
                 likes: row.likes || 0,
+                creator_username: row.creator_username || 'Unknown',
                 weapons
             };
         });
@@ -205,6 +208,13 @@ const getBuildById = (buildId) => new Promise((resolve, reject) => {
     });
 });
 
+const shareBuild = (buildId, userId) => new Promise((resolve, reject) => {
+    const sql = `UPDATE builds SET is_public = TRUE WHERE id = ? AND user_id = ?`;
+    db.query(sql, [buildId, userId], (err, result) => {
+        if (err) return reject(err);
+        resolve({ shared: result.affectedRows > 0 });
+    });
+});
 
 
 
@@ -216,4 +226,5 @@ module.exports = {
     getPublicBuilds,
     likeBuild,
     getBuildById,
+    shareBuild,
 };

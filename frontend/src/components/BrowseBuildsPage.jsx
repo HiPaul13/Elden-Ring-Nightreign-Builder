@@ -10,6 +10,11 @@ function BrowseBuildsPage() {
     const [characterFilter, setCharacterFilter] = useState('');
     const [sortByLikes, setSortByLikes] = useState(false);
 
+    const hasLikedBuild = (buildId) => {
+        return !!localStorage.getItem(`liked-build-${buildId}`);
+    };
+
+
     const fetchBuilds = async () => {
         try {
             setLoading(true);
@@ -29,12 +34,19 @@ function BrowseBuildsPage() {
 
     const handleLike = async (buildId) => {
         try {
+            // prevent double-like on frontend
+            const liked = localStorage.getItem(`liked-build-${buildId}`);
+
+            if (liked) return;
+
             await apiService.likeBuild(buildId);
-            fetchBuilds(); // reload builds with updated likes
+            localStorage.setItem(`liked-build-${buildId}`, 'true'); // mark as liked
+            fetchBuilds(); // refresh like count
         } catch {
             alert('Failed to like the build');
         }
     };
+
 
     return (
         <div className="page-container">
@@ -87,8 +99,25 @@ function BrowseBuildsPage() {
                                     ))}
                                 </div>
                             </Link>
+
+                            {/* ✅ This works now */}
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    handleLike(build.id);
+                                }}
+                                disabled={hasLikedBuild(build.id)}
+                                className={hasLikedBuild(build.id) ? 'liked-button' : ''}
+                            >
+                                {hasLikedBuild(build.id) ? '✅ Liked' : '👍 Like This Build'}
+                            </button>
+
+
                         </div>
+
                     ))}
+
                 </div>
 
             )}

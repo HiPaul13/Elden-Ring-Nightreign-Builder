@@ -19,6 +19,9 @@ router.post('/', buildController.createBuild);
 
 router.put('/:buildId', buildController.updateBuildWeapons);
 
+router.put('/:buildId/share', buildController.shareBuild);
+
+
 
 
 

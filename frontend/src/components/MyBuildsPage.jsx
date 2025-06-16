@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import * as apiService from '../services/apiService';
+import { Link } from 'react-router-dom';
 import '../styles/MyBuildsPage.css'; // Optional for styling
 
 function MyBuildsPage() {
     const { id } = useParams(); // User ID from route
-    const navigate = useNavigate();
     const [builds, setBuilds] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -38,22 +38,35 @@ function MyBuildsPage() {
                 <div className="build-list">
                     {builds.map((build) => (
                         <div key={build.id} className="build-card">
-                            <h3>{build.name || 'Unnamed Build'}</h3> {/* Display build name */}
-                            <div className="weapon-preview">
-                                {build.weapons.map((weapon, idx) => (
-                                    <div key={idx} className="weapon-slot">
-                                        {weapon ? (
-                                            <>
-                                                <img src={weapon.image_url} alt={weapon.name} />
-                                                <p>{weapon.name}</p>
-                                            </>
-                                        ) : (
-                                            <p>Empty</p>
-                                        )}
-                                    </div>
-                                ))}
+                            <div className="build-info">
+                                <h3>{build.name || 'Unnamed Build'}</h3>
+
+                                <div className="weapon-preview">
+                                    {build.weapons.map((weapon, idx) => (
+                                        <div key={idx} className="weapon-slot">
+                                            {weapon ? (
+                                                <>
+                                                    <img src={weapon.image_url} alt={weapon.name} />
+                                                    <p>{weapon.name}</p>
+                                                </>
+                                            ) : (
+                                                <p>Empty</p>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="build-actions">
+                                <Link
+                                    to={`/users/${id}/myBuilds/${build.id}`}
+                                    className="view-details-button"
+                                >
+                                    🔍 View Details
+                                </Link>
                             </div>
                         </div>
+
                     ))}
 
                 </div>
