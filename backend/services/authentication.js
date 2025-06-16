@@ -11,6 +11,7 @@ const bcrypt = require('bcrypt');
 async function authenticateUser({ email, password }, users, res) {
     const user = users.find(u => u.email === email);
 
+
     if (!user) {
         return res.status(401).json({ message: 'User not found' });
     }

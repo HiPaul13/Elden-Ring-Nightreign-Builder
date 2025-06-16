@@ -11,6 +11,9 @@ import SelectWeaponPage from './components/SelectWeaponPage';
 import CreateWeaponBuild from "./components/CreateWeaponBuild";
 import NavigateToNewBuild from './components/NavigateToNewBuild';
 import MyBuildsPage from './components/MyBuildsPage';
+import BrowseBuildsPage from './components/BrowseBuildsPage';
+import BuildDetailPage from './components/BuildDetailPage';
+
 
 
 function App() {
@@ -22,6 +25,12 @@ function App() {
             <Route path="/" element={<HomePage/>}></Route>
             <Route path="/login" element={<LoginPage/>}></Route>
             <Route path="/weapons" element={<WeaponsPage/>}></Route>
+            <Route path="/browse" element={<BrowseBuildsPage />} />
+            <Route path="/builds/:buildId" element={<BuildDetailPage />} />
+
+
+
+
 
 
             <Route path="/users/:id/myBuilds" element={

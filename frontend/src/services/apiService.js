@@ -206,5 +206,34 @@ export const fetchAllWeapons = async () => {
     return await response.json();
 };
 
+export const fetchPublicBuilds = async (character, sortByLikes) => {
+    const params = new URLSearchParams();
+    if (character) params.append('character', character);
+    if (sortByLikes) params.append('sort', 'likes');
+
+    const response = await fetch(`${BASE_URL}/builds/public?${params.toString()}`);
+    if (!response.ok) throw new Error('Failed to fetch builds');
+    return await response.json();
+};
+
+export const likeBuild = async (buildId) => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`http://localhost:3000/api/builds/${buildId}/like`, {
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    if (!response.ok) throw new Error('Failed to like build');
+    return await response.json();
+};
+
+export const fetchBuildById = async (buildId) => {
+    const response = await fetch(`http://localhost:3000/api/builds/${buildId}`);
+    if (!response.ok) throw new Error('Failed to fetch build');
+    return await response.json();
+};
+
 
 
