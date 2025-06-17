@@ -23,7 +23,7 @@ function App() {
             <Routes>
 
                 {/* Public Routes */}
-                <Route path="/" element={<HomePage />} />
+
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/builds/:buildId" element={<BuildDetailPage />} />
@@ -51,7 +51,7 @@ function App() {
                 </Route>
 
                 {/* Fallback */}
-                <Route path="*" element={<Navigate to="/" />} />
+                <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
     );
 }

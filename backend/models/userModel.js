@@ -72,7 +72,7 @@ let getUserByEmail = (email) => new Promise((resolve, reject) => {
 
 let createUser = (userData) => new Promise((resolve, reject) => {
     const sql = `
-        INSERT INTO users (username, email, password, profile_picture)
+        INSERT INTO users (username, email, password_hash, profile_picture)
         VALUES (?, ?, ?, ?)
     `;
     const values = [

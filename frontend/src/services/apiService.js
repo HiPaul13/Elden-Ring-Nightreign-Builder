@@ -218,7 +218,7 @@ export const fetchPublicBuilds = async (character, sortByLikes) => {
 
 export const likeBuild = async (buildId) => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`http://localhost:3000/api/builds/${buildId}/like`, {
+    const response = await fetch(`${BASE_URL}/builds/${buildId}/like`, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`
@@ -230,13 +230,13 @@ export const likeBuild = async (buildId) => {
 };
 
 export const fetchBuildById = async (buildId) => {
-    const response = await fetch(`http://localhost:3000/api/builds/${buildId}`);
+    const response = await fetch(`${BASE_URL}/builds/${buildId}`);
     if (!response.ok) throw new Error('Failed to fetch build');
     return await response.json();
 };
 
 export const shareBuild = async (token, buildId) => {
-    const response = await fetch(`http://localhost:3000/api/builds/${buildId}/share`, {
+    const response = await fetch(`${BASE_URL}/builds/${buildId}/share`, {
         method: 'PUT',
         headers: {
             Authorization: `Bearer ${token}`
@@ -249,7 +249,7 @@ export const shareBuild = async (token, buildId) => {
 
 
 export async function register(username, email, password, profilePicture) {
-    const response = await fetch('http://localhost:3000/api/register', {
+    const response = await fetch(`${BASE_URL}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password, profilePicture }),
