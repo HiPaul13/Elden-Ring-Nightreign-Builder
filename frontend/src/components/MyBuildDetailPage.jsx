@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as apiService from '../services/apiService';
 import BuildCard from './BuildCard';
-import '../styles/MyBuildDetailPage.css';
+import '../styles/BuildDetailPage.css';
 
 function MyBuildDetailPage() {
     const { id, buildId } = useParams(); // id = userId

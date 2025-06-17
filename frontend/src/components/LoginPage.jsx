@@ -26,7 +26,7 @@ function LoginPage() {
             localStorage.setItem('token', data.token);
 
             // Redirect to the protected users page
-            navigate('/users');
+            navigate('/browse');
         } catch (error) {
             // Show error message returned from API (e.g., invalid credentials)
             setLoginError(error.message);

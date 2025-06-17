@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import * as apiService from '../services/apiService';
-import '../styles/MyBuildsPage.css'; // reuse styles
+import '../styles/BuildDetailPage.css';
+import BuildCard from "./BuildCard.jsx";
 
 function BuildDetailPage() {
     const { buildId } = useParams();
@@ -44,30 +45,28 @@ function BuildDetailPage() {
     if (error || !build) return <p style={{ color: 'red' }}>{error || 'Build not found'}</p>;
 
     return (
-        <div className="page-container">
-            <h2>{build.name}</h2>
-            <p><strong>Character:</strong> {build.character}</p>
-            <p><strong>Likes:</strong> {build.likes}</p>
+        <div className="detail-page-wrapper">
+            <h2>Build Details</h2>
 
-            <div className="weapon-preview">
-                {build.weapons.map((weapon, idx) => (
-                    <div key={idx} className="weapon-slot">
-                        <img src={weapon.image_url} alt={weapon.name} />
-                        <p>{weapon.name}</p>
-                    </div>
-                ))}
+            <div className="build-card-with-share">
+                <BuildCard
+                    build={build}
+                    size="large"
+                    showCharacterImage={true}
+                    likeButton={
+                        <button
+                            onClick={handleLike}
+                            disabled={hasLikedBuild(build.id)}
+                            className={hasLikedBuild(build.id) ? 'liked-button' : ''}
+                        >
+                            {hasLikedBuild(build.id) ? '✅ Liked' : '👍Like'}
+                        </button>
+                    }
+                />
             </div>
-
-            <button
-                onClick={() => handleLike()}
-                disabled={hasLikedBuild(build.id)}
-                className={hasLikedBuild(build.id) ? 'liked-button' : ''}
-            >
-                {hasLikedBuild(build.id) ? '✅ Liked' : '👍 Like This Build'}
-            </button>
-
         </div>
     );
+
 }
 
 export default BuildDetailPage;

@@ -22,10 +22,11 @@ function UserProfilePage() {
     const isOwner = parseInt(id) === parseInt(currentUserId);
 
 
+
     const [user, setUser] = useState({});
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [profilePicture, setProfilePicture] = useState('');
+    const [profile_picture, setProfilePicture] = useState('');
     const [builds, setBuilds] = useState([]);
 
     useEffect(() => {
@@ -56,10 +57,21 @@ function UserProfilePage() {
         fetchPublicBuilds();
     }, [id]);
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/login');
+    };
+
+
     const handleSave = async () => {
         try {
             const token = localStorage.getItem('token');
-            await apiService.updateUser(token, id, { username, email, profilePicture });
+            await apiService.updateUser(token, id, {id, username, email, profile_picture });
+            const updatedUser = await apiService.fetchUserById(token, id);
+            setUser(updatedUser);
+            setUsername(updatedUser.username);
+            setEmail(updatedUser.email);
+            setProfilePicture(updatedUser.profile_picture || '');
             alert('Profile updated');
         } catch {
             alert('Failed to save profile');
@@ -77,12 +89,21 @@ function UserProfilePage() {
 
     return (
         <div className="profile-wrapper">
+            <img
+                src="/images/buttons/LogoutButton1.png" // Add your custom logout image here
+                alt="Logout"
+                className="logout-button"
+                onClick={handleLogout}
+            />
             <div className="profile-header">
-                <img
-                    src={profilePicture || '/images/ProfilePicture.png'}
-                    alt="Avatar"
-                    className="profile-avatar"
-                />
+
+                        <img
+                            src={profile_picture || '/images/ProfilePicture.png'}
+                            alt="Avatar"
+                            className="profile-avatar"
+                        />
+
+
 
                 <div className="profile-fields">
                     {isOwner ? (
@@ -102,7 +123,7 @@ function UserProfilePage() {
                                 accept="image/*"
                                 onChange={handleImageUpload}
                             />
-                            <button onClick={handleSave}>Save Profile</button>
+                            <button className="save-profile-button" onClick={handleSave}>Save Profile</button>
                         </>
                     ) : (
                         <>
@@ -110,25 +131,45 @@ function UserProfilePage() {
                         </>
                     )}
                 </div>
+                <div className="profile-logout">
+                        {isOwner && (
+                            <img
+                                src="/images/buttons/MyBuilds.png"
+                                alt="View My Builds"
+                                className="view-builds-button"
+                                onClick={() => navigate(`/users/${id}/myBuilds`)}
+                            />
+                        )}
+                </div>
+
+
             </div>
 
-            {isOwner && (
-                <button className="my-builds-button" onClick={() => navigate(`/users/${id}/myBuilds`)}>
-                    View My Builds
-                </button>
-            )}
+
 
             <h3>{username}'s Builds</h3>
-            <div className="build-grid">
-                {builds.map((build) => (
+            {builds.length === 1 ? (
+                <div className="single-build-wrapper">
                     <BuildCard
-                        key={build.id}
-                        build={build}
+                        key={builds[0].id}
+                        build={builds[0]}
                         size="small"
-                        onClick={() => navigate(`/builds/${build.id}`)}
+                        onClick={() => navigate(`/builds/${builds[0].id}`)}
                     />
-                ))}
-            </div>
+                </div>
+            ) : (
+                <div className="build-grid">
+                    {builds.map((build) => (
+                        <BuildCard
+                            key={build.id}
+                            build={build}
+                            size="small"
+                            onClick={() => navigate(`/builds/${build.id}`)}
+                        />
+                    ))}
+                </div>
+            )}
+
         </div>
     );
 }

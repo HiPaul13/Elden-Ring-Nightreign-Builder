@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as apiService from '../services/apiService';
-import '../styles/CreateBuild.css';
+import '../styles/CreateWeaponBuild.css';
+
 
 const characterImages = {
     "Raider": "/images/characters/raider.png",
@@ -89,68 +90,81 @@ function CreateWeaponBuild() {
 
     return (
         <div className="page-container">
-            <h2>Create Your Weapon Build</h2>
-            <div className="build-grid">
+            <h2 className="create-build-header">Create Build</h2>
 
-                <input
-                    type="text"
-                    placeholder="Enter build name"
-                    value={buildName}
+            {/* Character selection ABOVE the card */}
+            <div className="character-select-row">
+                <label className="input-label">Select Character</label>
+                <select
+                    value={character}
                     onChange={(e) => {
-                        setBuildName(e.target.value);
-                        localStorage.setItem(`build-${buildId}-name`, e.target.value);
+                        setCharacter(e.target.value);
+                        localStorage.setItem(`build-${buildId}-character`, e.target.value);
                     }}
                     required
-                />
+                >
+                    <option value="">-- Choose --</option>
+                    {Object.keys(characterImages).map((char) => (
+                        <option key={char} value={char}>{char}</option>
+                    ))}
+                </select>
+            </div>
 
-                <div className="form-field">
-                    <label htmlFor="character">Select Character:</label>
-                    <select
-                        id="character"
-                        value={character}
-                        onChange={(e) => {
-                            setCharacter(e.target.value);
-                            localStorage.setItem(`build-${buildId}-character`, e.target.value);
-                        }}
-                        required
-                    >
-                        <option value="">-- Choose --</option>
-                        <option value="Raider">Raider</option>
-                        <option value="Wylder">Wylder</option>
-                        <option value="Ironeye">Ironeye</option>
-                        <option value="Executor">Executor</option>
-                        <option value="Duchess">Duchess</option>
-                        <option value="Guardian">Guardian</option>
-                        <option value="Recluse">Recluse</option>
-                        <option value="Revenant">Revenant</option>
-                    </select>
+            {/* The card */}
+            <div className="create-build-body">
+                <div className="build-card-left">
+
+                    {/* Top: name + save */}
+                    <div className="top-form-row">
+                        <input
+                            type="text"
+                            placeholder="Enter build name"
+                            value={buildName}
+                            onChange={(e) => {
+                                setBuildName(e.target.value);
+                                localStorage.setItem(`build-${buildId}-name`, e.target.value);
+                            }}
+                            required
+                        />
+                        <img
+                            src="/images/buttons/Save_Build_Button.png"
+                            alt="Save Build"
+                            className="save-button-image"
+                            onClick={handleSaveBuild}
+                        />
+                    </div>
+
+                    <div className="bot-form-row">
+                        <div className="weapon-grid">
+                            {selectedWeapons.map((weapon, index) => (
+                                <div key={index} className="weapon-slot" onClick={() => handleSlotClick(index)}>
+                                    {weapon ? (
+                                        <img src={weapon.image_url} alt={weapon.name} />
+                                    ) : (
+                                        <p style={{ fontSize: '2rem', color: '#333' }}>+</p>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Right side: character preview */}
+                        {character && characterImages[character] && (
+                            <div className="character-preview aligned-preview">
+                                <img src={characterImages[character]} alt={character} />
+                            </div>
+                        )}
+
+                    </div>
+
                 </div>
 
-                {character && characterImages[character] && (
-                    <div className="character-preview">
-                        <h4>Selected Character: {character}</h4>
-                        <img src={characterImages[character]} alt={character} style={{ maxWidth: '200px' }} />
-                    </div>
-                )}
-
-
-
-                {selectedWeapons.map((weapon, index) => (
-                    <div key={index} className="build-slot" onClick={() => handleSlotClick(index)}>
-                        {weapon ? (
-                            <>
-                                <img src={weapon.image_url} alt={weapon.name} />
-                                <p>{weapon.name}</p>
-                            </>
-                        ) : (
-                            <p>+</p>
-                        )}
-                    </div>
-                ))}
-                <button onClick={handleSaveBuild}>Save Build</button>
-
             </div>
+
+
         </div>
+
+
+
     );
 }
 export default CreateWeaponBuild;

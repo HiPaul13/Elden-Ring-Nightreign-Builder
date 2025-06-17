@@ -28,8 +28,9 @@ app.use(cookieParser());
 
 // Helps express to read the body of incoming HTTP requests/ ecample req.body.username
 const bodyParser = require('body-parser');
-app.use(bodyParser.json());                         // Parse JSON bodies
-app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded form data
+app.use(bodyParser.json({ limit: '2mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '2mb' }));
+// Parse URL-encoded form data
 
 // Route modules
 const indexRouter = require('./routes/index');   // Routes for login, register, chat, etc.
