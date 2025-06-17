@@ -1,4 +1,6 @@
 const userModel = require('../models/userModel');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // GET all users
 function getUsers(req, res, next) {
@@ -35,11 +37,37 @@ function deleteUser(req, res, next) {
         .catch(err => next(err));
 }
 
+
+function register(req, res, next) {
+    const { username, email, password, profilePicture } = req.body;
+
+    if (!username || !email || !password) {
+        return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    bcrypt.hash(password, 10, async (err, hash) => {
+        if (err) return next(err);
+
+        try {
+            await userModel.createUser({ username, email, password: hash, profile_picture: profilePicture });
+            res.status(201).json({ message: 'User registered successfully' });
+        } catch (error) {
+            if (error.code === 'ER_DUP_ENTRY') {
+                res.status(400).json({ message: 'Email already in use' });
+            } else {
+                next(error);
+            }
+        }
+    });
+}
+
+
 module.exports = {
     getUsers,
     getUser,
     updateUser,
     createUser,
-    deleteUser
+    deleteUser,
+    register
 };
 

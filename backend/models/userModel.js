@@ -70,11 +70,30 @@ let getUserByEmail = (email) => new Promise((resolve, reject) => {
     });
 });
 
+let createUser = (userData) => new Promise((resolve, reject) => {
+    const sql = `
+        INSERT INTO users (username, email, password, profile_picture)
+        VALUES (?, ?, ?, ?)
+    `;
+    const values = [
+        userData.username,
+        userData.email,
+        userData.password,
+        userData.profile_picture || null
+    ];
+    db.query(sql, values, (err, result) => {
+        if (err) return reject(err);
+        resolve(result);
+    });
+});
+
+
 module.exports = {
     getUsers,
     getUser,
     updateUser,
     addUser,
     deleteUser,
-    getUserByEmail
+    getUserByEmail,
+    createUser
 };

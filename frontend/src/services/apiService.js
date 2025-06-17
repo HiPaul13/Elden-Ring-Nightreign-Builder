@@ -248,3 +248,20 @@ export const shareBuild = async (token, buildId) => {
 };
 
 
+export async function register(username, email, password, profilePicture) {
+    const response = await fetch('http://localhost:3000/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email, password, profilePicture }),
+    });
+
+    if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.message || 'Registration failed');
+    }
+
+    return response.json();
+}
+
+
+

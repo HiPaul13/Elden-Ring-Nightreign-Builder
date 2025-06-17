@@ -15,6 +15,7 @@ import MyBuildDetailPage from './components/MyBuildDetailPage';
 import BrowseBuildsPage from './components/BrowseBuildsPage';
 import BuildDetailPage from './components/BuildDetailPage';
 import UserProfilePage from "./components/UserProfilePage.jsx";
+import RegisterPage from "./components/ReigisterPage.jsx";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 {/* Public Routes */}
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
                 <Route path="/builds/:buildId" element={<BuildDetailPage />} />
 
                 {/* Protected Routes - wrapped in Layout with nav */}

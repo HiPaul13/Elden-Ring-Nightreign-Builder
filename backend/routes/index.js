@@ -1,6 +1,7 @@
 const express = require('express');
 const userModel = require("../models/userModel");
 const authenticationService = require("../services/authentication");
+const userController = require('../controllers/userController')
 
 const router = express.Router();
 
@@ -20,5 +21,6 @@ router.post('/login', async (req, res) => {
     }
 });
 
+router.post('/register', userController.register);
 
 module.exports = router;

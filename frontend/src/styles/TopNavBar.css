@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #111;
+    background-color: #1a1a1a;
     padding: 0px 20px;
     position: fixed;
     top: 0;
@@ -20,7 +20,7 @@
     margin-right: 3vh;
 }
 .logo {
-    width: 5vh;
+    width: 7vh;
     cursor: pointer;
     transition: transform 0.2s ease;
 }
@@ -30,7 +30,7 @@
 }
 
 .nav-icon {
-    width: 7vh;
+    width: 10vh;
     cursor: pointer;
     transition: transform 0.2s ease;
 }
