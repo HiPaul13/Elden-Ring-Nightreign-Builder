@@ -1,4 +1,4 @@
-Di.10.Juni:
+Tue.10.Juni:
 
 What I did: finished Prototype and setup the db.
 Biggest Learning: Recap on seting up DB and Repository
@@ -6,7 +6,7 @@ Biggest Failure: Autolayout in Figma is not easy to use and very annoying i need
 Notes For The next Day: I want to connect Frontend and backend and start into the Project.
 
 
-Mi.11.Juni
+Wed.11.Juni
 
 What I did: I tried the whole day to combine frontend and backend, i didnt finish it unfortunately
 Biggest Learning: ChatGPT can help you out of everything. I should have build it from scratch and just use simple functions not copy and then adjust all the files.
@@ -15,7 +15,7 @@ Notes For The next Day: finish connect frontend and backend then setup fetch wea
 
 
 
-Do.12.Juni
+Thu.12.Juni
 
 What I did: Finished connecting Frontend and Backend, fetched weapons from elden ring api
 Biggest Learning: Learned how to fetch something from another api
@@ -31,25 +31,25 @@ Biggest Failure: No failure today everything worked so far.
 Notes For The next Day: For the next day i want to implement the Browse Page and where people can like builds.
 
 
-Sa.14.Juni
+Mo.16.Juni
 
-What I did:
-Biggest Learning:
-Biggest Failure:
-Notes For The next Day:
-
-
-So.15.Juni
-
-What I did:
-Biggest Learning:
-Biggest Failure:
-Notes For The next Day:
+What I did: Implemented BrowsePage, Implemented NavBar and UserProfilePage
+Biggest Learning: A good setup is helps for a good workflow, at Home i was a lot faster
+Biggest Failure: 
+Notes For The next Day: start to style the frontend.
 
 
-Mi.11.Juni
+Tue.17.Juni
 
-What I did:
-Biggest Learning:
-Biggest Failure:
-Notes For The next Day:
+What I did: Started with the frontend styling, styled DetailedBuildView, createBuildviews and the UserProfilePage, implemented register and loginPage with styling
+Biggest Learning: css is hard and does a lot of things i dont understand, take care of naming things in css,
+Biggest Failure: Named a lot of components the same in css so they influenced each other.
+Notes For The next Day: Implement Chat and finish styling
+
+
+Wed.11.Juni
+
+What I did: Implemented the Chat feature and restyled the Userprofile and BrowseBuildsPage. Added styling to the SelectWeaponsPage.
+Biggest Learning: Structure your css good.
+Biggest Failure: Had a lot of css bugs, still not perfect.
+Notes For The next Day: Implement footer, get it on CampusCloud
