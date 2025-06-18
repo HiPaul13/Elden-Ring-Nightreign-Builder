@@ -89,78 +89,77 @@ function CreateWeaponBuild() {
     };
 
     return (
-        <div className="page-container">
-            <h2 className="create-build-header">Create Build</h2>
+        <div className="page-container1">
 
-            {/* Character selection ABOVE the card */}
-            <div className="character-select-row">
-                <label className="input-label">Select Character</label>
-                <select
-                    value={character}
-                    onChange={(e) => {
-                        setCharacter(e.target.value);
-                        localStorage.setItem(`build-${buildId}-character`, e.target.value);
-                    }}
-                    required
-                >
-                    <option value="">-- Choose --</option>
-                    {Object.keys(characterImages).map((char) => (
-                        <option key={char} value={char}>{char}</option>
-                    ))}
-                </select>
-            </div>
+                <h2 className="create-build-header">Create Build</h2>
 
-            {/* The card */}
-            <div className="create-build-body">
-                <div className="build-card-left">
+                {/* Character selection ABOVE the card */}
+                <div className="character-select-row">
+                    <label className="input-label">Select Character</label>
+                    <select
+                        value={character}
+                        onChange={(e) => {
+                            setCharacter(e.target.value);
+                            localStorage.setItem(`build-${buildId}-character`, e.target.value);
+                        }}
+                        required
+                    >
+                        <option value="">-- Choose --</option>
+                        {Object.keys(characterImages).map((char) => (
+                            <option key={char} value={char}>{char}</option>
+                        ))}
+                    </select>
+                </div>
 
-                    {/* Top: name + save */}
-                    <div className="top-form-row">
-                        <input
-                            type="text"
-                            placeholder="Enter build name"
-                            value={buildName}
-                            onChange={(e) => {
-                                setBuildName(e.target.value);
-                                localStorage.setItem(`build-${buildId}-name`, e.target.value);
-                            }}
-                            required
-                        />
-                        <img
-                            src="/images/buttons/Save_Build_Button.png"
-                            alt="Save Build"
-                            className="save-button-image"
-                            onClick={handleSaveBuild}
-                        />
-                    </div>
+                {/* The card */}
+                <div className="create-build-body">
+                    <div className="build-card-left">
 
-                    <div className="bot-form-row">
-                        <div className="weapon-grid">
-                            {selectedWeapons.map((weapon, index) => (
-                                <div key={index} className="weapon-slot" onClick={() => handleSlotClick(index)}>
-                                    {weapon ? (
-                                        <img src={weapon.image_url} alt={weapon.name} />
-                                    ) : (
-                                        <p style={{ fontSize: '2rem', color: '#333' }}>+</p>
-                                    )}
-                                </div>
-                            ))}
+                        {/* Top: name + save */}
+                        <div className="top-form-row">
+                            <input
+                                type="text"
+                                placeholder="Enter build name"
+                                value={buildName}
+                                onChange={(e) => {
+                                    setBuildName(e.target.value);
+                                    localStorage.setItem(`build-${buildId}-name`, e.target.value);
+                                }}
+                                required
+                            />
+                            <img
+                                src="/images/buttons/Save_Build_Button.png"
+                                alt="Save Build"
+                                className="save-button-image"
+                                onClick={handleSaveBuild}
+                            />
                         </div>
 
-                        {/* Right side: character preview */}
-                        {character && characterImages[character] && (
-                            <div className="character-preview aligned-preview">
-                                <img src={characterImages[character]} alt={character} />
+                        <div className="bot-form-row">
+                            <div className="weapon-grid">
+                                {selectedWeapons.map((weapon, index) => (
+                                    <div key={index} className="weapon-slot" onClick={() => handleSlotClick(index)}>
+                                        {weapon ? (
+                                            <img src={weapon.image_url} alt={weapon.name} />
+                                        ) : (
+                                            <p style={{ fontSize: '2rem', color: '#333' }}>+</p>
+                                        )}
+                                    </div>
+                                ))}
                             </div>
-                        )}
+
+                            {/* Right side: character preview */}
+                            {character && characterImages[character] && (
+                                <div className="character-preview aligned-preview">
+                                    <img src={characterImages[character]} alt={character} />
+                                </div>
+                            )}
+
+                        </div>
 
                     </div>
 
                 </div>
-
-            </div>
-
-
         </div>
 
 

@@ -1,8 +1,13 @@
-.my-builds-wrapper {
+
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 2rem;
+    height: 100%;
+    margin-top: 35px;
 }
 
 
@@ -55,4 +60,36 @@ h2 {
     font-style: italic;
     cursor: default;
     margin-top: 0.5rem;
+}
+
+.like-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: 3px;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.like-icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.like-icon:hover {
+    transform: scale(1.1);
+}
+
+.like-icon.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    transform: none;
+}
+
+.like-count {
+    font-size: 1rem;
+    color: white;
+    text-align: center;
 }

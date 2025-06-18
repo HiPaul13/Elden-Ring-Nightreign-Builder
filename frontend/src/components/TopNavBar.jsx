@@ -19,7 +19,7 @@ function TopNavBar({ userId }) {
                     src="/images/buttons/Chat.png"
                     alt="Chat"
                     className="nav-icon"
-                    onClick={() => navigate('/logout')}
+                    onClick={() => navigate('/Chat')}
                     title="Chat"
                 />
                 <img

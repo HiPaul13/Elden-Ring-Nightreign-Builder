@@ -22,7 +22,6 @@ function UserProfilePage() {
     const isOwner = parseInt(id) === parseInt(currentUserId);
 
 
-
     const [user, setUser] = useState({});
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');

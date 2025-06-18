@@ -7,11 +7,18 @@ function BuildCard({ build, onClick, showCharacterImage = true, size = 'medium',
             <div className="build-info-bar">
                 <h3 className="build-name">{build.name || 'Unnamed Build'}</h3>
                 <div className="build-top-actions">
-                    {build.creator_username && (
-                        <p className="build-credits">By {build.creator_username}</p>
-                    )}
-                    {shareButton && shareButton}
-                    {likeButton && likeButton}
+                    <div>
+                        {build.creator_username && (
+                            <p className="build-credits">By {build.creator_username}</p>
+                        )}
+                    </div>
+                    <div>
+                        {shareButton && shareButton}
+                    </div>
+                    <div>
+                        {likeButton && likeButton}
+                    </div>
+
                 </div>
             </div>
 

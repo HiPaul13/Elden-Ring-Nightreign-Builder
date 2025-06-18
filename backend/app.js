@@ -14,7 +14,7 @@ app.use(cors({
 
 // Import custom modules
 const db = require('./services/database');     // MySQL DB connection setup
-//const ws = require('./services/websockets');   // WebSocket server
+const ws = require('./services/websockets');   // WebSocket server
 
 const path = require('path');                  // Node.js path utility
 //const ejs = require('ejs');                    // EJS templating engine

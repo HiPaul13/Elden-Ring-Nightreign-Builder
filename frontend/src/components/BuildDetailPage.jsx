@@ -53,15 +53,7 @@ function BuildDetailPage() {
                     build={build}
                     size="large"
                     showCharacterImage={true}
-                    likeButton={
-                        <button
-                            onClick={handleLike}
-                            disabled={hasLikedBuild(build.id)}
-                            className={hasLikedBuild(build.id) ? 'liked-button' : ''}
-                        >
-                            {hasLikedBuild(build.id) ? '✅ Liked' : '👍Like'}
-                        </button>
-                    }
+
                 />
             </div>
         </div>

@@ -1,11 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout'; // <- includes TopNavBar
-import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import UsersPage from './components/UsersPage';
 import CreateUserPage from './components/CreateUserPage';
-import EditUserPage from './components/EditUserPage';
 import WeaponsPage from './components/WeaponsPage';
 import SelectWeaponPage from './components/SelectWeaponPage';
 import CreateWeaponBuild from './components/CreateWeaponBuild';
@@ -16,6 +14,7 @@ import BrowseBuildsPage from './components/BrowseBuildsPage';
 import BuildDetailPage from './components/BuildDetailPage';
 import UserProfilePage from "./components/UserProfilePage.jsx";
 import RegisterPage from "./components/ReigisterPage.jsx";
+import ChatPage from './components/ChatPage';
 
 function App() {
     return (
@@ -37,12 +36,13 @@ function App() {
                         </ProtectedRoute>
                     }
                 >
+
                     <Route path="browse" element={<BrowseBuildsPage />} />
                     <Route path="weapons" element={<WeaponsPage />} />
+                    <Route path="/chat" element={<ChatPage />} />
                     <Route path="users" element={<UsersPage />} />
                     <Route path="users/new" element={<CreateUserPage />} />
                     <Route path="users/:id" element={<UserProfilePage />} />
-                    <Route path="users/:id/edit" element={<EditUserPage />} />
                     <Route path="users/:id/myBuilds" element={<MyBuildsPage />} />
                     <Route path="users/:id/myBuilds/:buildId" element={<MyBuildDetailPage />} />
                     <Route path="users/:id/createBuild" element={<NavigateToNewBuild />} />

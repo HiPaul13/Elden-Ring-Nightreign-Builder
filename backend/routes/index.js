@@ -5,10 +5,6 @@ const userController = require('../controllers/userController')
 
 const router = express.Router();
 
-/**
- * Route: POST /login
- * Authenticate user using email/password and return token
- */
 router.post('/login', async (req, res) => {
     try {
         const users = await userModel.getUsers();

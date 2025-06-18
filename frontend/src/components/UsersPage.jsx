@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as apiService from '../services/apiService';
-import '../styles/FormStyles.css';
 
 function UsersPage() {
     const [users, setUsers] = useState([]);

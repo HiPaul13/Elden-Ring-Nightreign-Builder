@@ -1,4 +1,4 @@
-/**
+
 // Import the 'ws' WebSocket library
 const Websockets = require('ws');
 
@@ -39,7 +39,7 @@ wss.on('connection', ws => {
  * @param {string} text - The message stringified as JSON
  */
 
-/**
+
 function websocketSendToAll(text) {
     wss.clients.forEach(function each(client) { //wss.clients = all clients connected // function each(client) for each client
         // Only send to clients that are open and in the same room
@@ -50,4 +50,3 @@ function websocketSendToAll(text) {
         }
     });
 }
-*/

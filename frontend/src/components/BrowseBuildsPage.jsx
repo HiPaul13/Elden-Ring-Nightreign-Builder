@@ -50,6 +50,27 @@ function BrowseBuildsPage() {
         }
     };
 
+    const LikeButton = ({ build }) => {
+        const liked = hasLikedBuild(build.id);
+
+        return (
+            <div className="like-wrapper">
+                <img
+                    src="/images/buttons/LikeButton.PNG" // your own like image
+                    alt="Like"
+                    className={`like-icon ${liked ? 'disabled' : ''}`}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (!liked) handleLike(build.id);
+                    }}
+                />
+                <span className="like-count">{build.likes}</span>
+            </div>
+        );
+    };
+
+
 
     return (
         <div className="page-container">
@@ -89,19 +110,7 @@ function BrowseBuildsPage() {
                             build={build}
                             size="small"
                             onClick={() => navigate(`/builds/${build.id}`)}
-                            likeButton={
-                                <button
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        handleLike(build.id);
-                                    }}
-                                    disabled={hasLikedBuild(build.id)}
-                                    className={hasLikedBuild(build.id) ? 'liked-button' : 'like-button'}
-                                >
-                                    {hasLikedBuild(build.id) ? '✅ Liked' : `❤️ ${build.likes}`}
-                                </button>
-                            }
+                            likeButton={<LikeButton build={build} />}
                         />
                     ))}
                 </div>

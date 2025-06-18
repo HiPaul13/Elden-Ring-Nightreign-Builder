@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as apiService from '../services/apiService';
-import '../styles/FormStyles.css';
 
 function CreateUserPage() {
     const [newUsername, setNewUsername] = useState('');

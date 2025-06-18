@@ -1,0 +1,133 @@
+.chat-wrapper {
+    background-color: #0f0f11;
+    color: white;
+    height: 100vh;
+    padding: 35px 30px;
+    position: relative;
+    font-family: sans-serif;
+    margin-top: 15px;
+    height: 100%;
+}
+
+.chat-logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+}
+
+.chat-title {
+    text-align: center;
+    color: #aaaaf0;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+.chat-layout {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.chat-box {
+    background-color: #d9d9d9;
+    border-radius: 16px;
+    padding: 20px;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    background-color: #3a3a3a;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.chat-log {
+    background-color: #3a3a3a;
+    flex: 1;
+    border-radius: 10px;
+    padding: 16px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.chat-bubble {
+    max-width: 70%;
+    padding: 10px;
+    margin: 6px 0;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+}
+
+.chat-bubble.mine {
+    background-color: #2bd0c8;
+    color: white;
+    align-self: flex-start;
+}
+
+.chat-bubble.theirs {
+    align-self: flex-end;
+}
+
+.chat-user {
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+    opacity: 0.7;
+}
+
+.chat-input-row {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input-row input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+}
+
+.chat-input-row button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2bd0c8;
+    color: white;
+    cursor: pointer;
+}
+
+.chat-room-list {
+    flex: 1;
+    background-color: #d9d9d9;
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.chat-room-list h3 {
+    color: black;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.room-button {
+    background-color: #3a3a3a;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.room-button.active {
+    background-color: #2bd0c8;
+}
