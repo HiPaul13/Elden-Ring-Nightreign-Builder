@@ -6,23 +6,23 @@ const mysql = require('mysql2');
 
 // Create a connection object with configuration settings
 const config = mysql.createConnection({
-    host: 'atp.fhstp.ac.at',               // Hostname of the database server
-    port: 8007,                            // Port number used by the database
-    user: process.env.DB_USERNAME,        // Username loaded from .env file
-    password: process.env.DB_PASSWORD,    // Password loaded from .env file
-    database: 'cc241055'                  // Name of the database
+    host: 'atp.fhstp.ac.at',               // Hostname of the database server (UAS FHSTP MySQL host)
+    port: 8007,                            // Port number used by the remote MySQL database
+    user: process.env.DB_USERNAME,        // Securely load DB username from environment variables
+    password: process.env.DB_PASSWORD,    // Securely load DB password from environment variables
+    database: 'cc241055'                  // Database schema name (e.g., your student ID schema)
 });
 
 // Establish the connection to the database
 config.connect((err) => {
     if (err) {
-        // If there's an error, stop the application and throw the error
+        // If there's a connection error, log it and stop the app
         throw err;
     } else {
-        // Successfully connected to the database
+        // Successfully connected
         console.log('Connected to database');
     }
 });
 
-// Export the config object to be used in other parts of the app (e.g., models)
+// Export the config object to be used in other parts of the app (e.g., models, services)
 module.exports = { config };

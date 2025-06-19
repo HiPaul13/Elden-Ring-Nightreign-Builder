@@ -1,19 +1,25 @@
-const {config: db} = require("../services/database");
+const { config: db } = require("../services/database");
 
-let createBuild = (user_id,) => new Promise((resolve, reject) => {
+/**
+ * Inserts a new build into the database for a given user.
+ * @param {number} user_id - The ID of the user creating the build.
+ */
+let createBuild = (user_id) => new Promise((resolve, reject) => {
     const sql = "INSERT INTO builds (user_id) VALUES (?)";
     db.query(sql, [user_id], (err, result) => {
         if (err) return reject(err);
-        resolve({ id: result.insertId, user_id});
+        resolve({ id: result.insertId, user_id });
     });
 });
 
+/**
+ * Updates a build's weapons, name, and character.
+ * Accepts only fields that are provided in buildData.
+ */
 const updateBuildWeapons = (buildId, buildData) => new Promise((resolve, reject) => {
     const fields = [];
     const values = [];
 
-
-    // Optional: build name
     if (buildData.name) {
         fields.push(`name = ?`);
         values.push(buildData.name);
@@ -24,6 +30,7 @@ const updateBuildWeapons = (buildId, buildData) => new Promise((resolve, reject)
         values.push(buildData.character);
     }
 
+    // Handle weapon slots (weapon_1_id to weapon_6_id)
     for (let i = 1; i <= 6; i++) {
         const key = `weapon_${i}_id`;
         if (buildData[key]) {
@@ -43,6 +50,9 @@ const updateBuildWeapons = (buildId, buildData) => new Promise((resolve, reject)
     });
 });
 
+/**
+ * Fetches all builds for a specific user, including up to 6 weapons per build.
+ */
 const getBuildsWithWeaponsByUser = (userId) => new Promise((resolve, reject) => {
     const sql = `
         SELECT
@@ -68,7 +78,6 @@ const getBuildsWithWeaponsByUser = (userId) => new Promise((resolve, reject) => 
 
         const builds = rows.map(row => {
             const weapons = [];
-
             for (let i = 1; i <= 6; i++) {
                 const wid = row[`w${i}_id`];
                 if (wid) {
@@ -92,24 +101,27 @@ const getBuildsWithWeaponsByUser = (userId) => new Promise((resolve, reject) => 
     });
 });
 
+/**
+ * Retrieves all public builds. Optional filtering by character and sorting by likes.
+ */
 const getPublicBuilds = (characterFilter, sortByLikes) => new Promise((resolve, reject) => {
     let sql = `
         SELECT b.*,
                u.username AS creator_username,
-            w1.name AS w1_name, w1.image_url AS w1_image,
-            w2.name AS w2_name, w2.image_url AS w2_image,
-            w3.name AS w3_name, w3.image_url AS w3_image,
-            w4.name AS w4_name, w4.image_url AS w4_image,
-            w5.name AS w5_name, w5.image_url AS w5_image,
-            w6.name AS w6_name, w6.image_url AS w6_image
+               w1.name AS w1_name, w1.image_url AS w1_image,
+               w2.name AS w2_name, w2.image_url AS w2_image,
+               w3.name AS w3_name, w3.image_url AS w3_image,
+               w4.name AS w4_name, w4.image_url AS w4_image,
+               w5.name AS w5_name, w5.image_url AS w5_image,
+               w6.name AS w6_name, w6.image_url AS w6_image
         FROM builds b
-        LEFT JOIN users u ON b.user_id = u.id
-        LEFT JOIN weapons w1 ON b.weapon_1_id = w1.id
-        LEFT JOIN weapons w2 ON b.weapon_2_id = w2.id
-        LEFT JOIN weapons w3 ON b.weapon_3_id = w3.id
-        LEFT JOIN weapons w4 ON b.weapon_4_id = w4.id
-        LEFT JOIN weapons w5 ON b.weapon_5_id = w5.id
-        LEFT JOIN weapons w6 ON b.weapon_6_id = w6.id
+                 LEFT JOIN users u ON b.user_id = u.id
+                 LEFT JOIN weapons w1 ON b.weapon_1_id = w1.id
+                 LEFT JOIN weapons w2 ON b.weapon_2_id = w2.id
+                 LEFT JOIN weapons w3 ON b.weapon_3_id = w3.id
+                 LEFT JOIN weapons w4 ON b.weapon_4_id = w4.id
+                 LEFT JOIN weapons w5 ON b.weapon_5_id = w5.id
+                 LEFT JOIN weapons w6 ON b.weapon_6_id = w6.id
         WHERE b.is_public = TRUE
     `;
 
@@ -120,11 +132,7 @@ const getPublicBuilds = (characterFilter, sortByLikes) => new Promise((resolve, 
         params.push(characterFilter);
     }
 
-    if (sortByLikes) {
-        sql += ` ORDER BY b.likes DESC`;
-    } else {
-        sql += ` ORDER BY b.created_at DESC`;
-    }
+    sql += sortByLikes ? ` ORDER BY b.likes DESC` : ` ORDER BY b.created_at DESC`;
 
     db.query(sql, params, (err, rows) => {
         if (err) return reject(err);
@@ -155,6 +163,9 @@ const getPublicBuilds = (characterFilter, sortByLikes) => new Promise((resolve, 
     });
 });
 
+/**
+ * Increments the like counter for a build by 1.
+ */
 const likeBuild = (buildId) => new Promise((resolve, reject) => {
     const sql = `UPDATE builds SET likes = likes + 1 WHERE id = ?`;
     db.query(sql, [buildId], (err, result) => {
@@ -163,22 +174,25 @@ const likeBuild = (buildId) => new Promise((resolve, reject) => {
     });
 });
 
+/**
+ * Fetches a public build by its ID, including up to 6 weapons.
+ */
 const getBuildById = (buildId) => new Promise((resolve, reject) => {
     const sql = `
-        SELECT b.*, 
-            w1.name AS w1_name, w1.image_url AS w1_image,
-            w2.name AS w2_name, w2.image_url AS w2_image,
-            w3.name AS w3_name, w3.image_url AS w3_image,
-            w4.name AS w4_name, w4.image_url AS w4_image,
-            w5.name AS w5_name, w5.image_url AS w5_image,
-            w6.name AS w6_name, w6.image_url AS w6_image
+        SELECT b.*,
+               w1.name AS w1_name, w1.image_url AS w1_image,
+               w2.name AS w2_name, w2.image_url AS w2_image,
+               w3.name AS w3_name, w3.image_url AS w3_image,
+               w4.name AS w4_name, w4.image_url AS w4_image,
+               w5.name AS w5_name, w5.image_url AS w5_image,
+               w6.name AS w6_name, w6.image_url AS w6_image
         FROM builds b
-        LEFT JOIN weapons w1 ON b.weapon_1_id = w1.id
-        LEFT JOIN weapons w2 ON b.weapon_2_id = w2.id
-        LEFT JOIN weapons w3 ON b.weapon_3_id = w3.id
-        LEFT JOIN weapons w4 ON b.weapon_4_id = w4.id
-        LEFT JOIN weapons w5 ON b.weapon_5_id = w5.id
-        LEFT JOIN weapons w6 ON b.weapon_6_id = w6.id
+                 LEFT JOIN weapons w1 ON b.weapon_1_id = w1.id
+                 LEFT JOIN weapons w2 ON b.weapon_2_id = w2.id
+                 LEFT JOIN weapons w3 ON b.weapon_3_id = w3.id
+                 LEFT JOIN weapons w4 ON b.weapon_4_id = w4.id
+                 LEFT JOIN weapons w5 ON b.weapon_5_id = w5.id
+                 LEFT JOIN weapons w6 ON b.weapon_6_id = w6.id
         WHERE b.id = ? AND b.is_public = TRUE
     `;
 
@@ -208,6 +222,9 @@ const getBuildById = (buildId) => new Promise((resolve, reject) => {
     });
 });
 
+/**
+ * Sets a build to public visibility if it belongs to the user.
+ */
 const shareBuild = (buildId, userId) => new Promise((resolve, reject) => {
     const sql = `UPDATE builds SET is_public = TRUE WHERE id = ? AND user_id = ?`;
     db.query(sql, [buildId, userId], (err, result) => {
@@ -216,9 +233,7 @@ const shareBuild = (buildId, userId) => new Promise((resolve, reject) => {
     });
 });
 
-
-
-
+// Export all functions
 module.exports = {
     createBuild,
     updateBuildWeapons,

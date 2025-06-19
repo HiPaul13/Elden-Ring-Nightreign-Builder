@@ -2,8 +2,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout'; // <- includes TopNavBar
 import LoginPage from './components/LoginPage';
-import UsersPage from './components/UsersPage';
-import CreateUserPage from './components/CreateUserPage';
 import WeaponsPage from './components/WeaponsPage';
 import SelectWeaponPage from './components/SelectWeaponPage';
 import CreateWeaponBuild from './components/CreateWeaponBuild';
@@ -22,10 +20,10 @@ function App() {
             <Routes>
 
                 {/* Public Routes */}
-
+                <Route path="/" element={<LoginPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
-                <Route path="/builds/:buildId" element={<BuildDetailPage />} />
+
 
                 {/* Protected Routes - wrapped in Layout with nav */}
                 <Route
@@ -36,12 +34,10 @@ function App() {
                         </ProtectedRoute>
                     }
                 >
-
+                    <Route path="/builds/:buildId" element={<BuildDetailPage />} />
                     <Route path="browse" element={<BrowseBuildsPage />} />
                     <Route path="weapons" element={<WeaponsPage />} />
                     <Route path="/chat" element={<ChatPage />} />
-                    <Route path="users" element={<UsersPage />} />
-                    <Route path="users/new" element={<CreateUserPage />} />
                     <Route path="users/:id" element={<UserProfilePage />} />
                     <Route path="users/:id/myBuilds" element={<MyBuildsPage />} />
                     <Route path="users/:id/myBuilds/:buildId" element={<MyBuildDetailPage />} />

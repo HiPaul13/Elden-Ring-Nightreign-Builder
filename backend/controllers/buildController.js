@@ -2,10 +2,10 @@ const buildModel = require('../models/buildModel');
 const weaponModel = require("../models/weaponModel");
 
 /**
- * Controller to create a new build for a user
+ * Creates a new empty build for a user.
+ * Expects user_id in the request body.
  */
 async function createBuild(req, res) {
-
     try {
         const { user_id } = req.body;
         const newBuild = await buildModel.createBuild(user_id);
@@ -17,6 +17,10 @@ async function createBuild(req, res) {
     }
 }
 
+/**
+ * Updates the weapons assigned to a build.
+ * Expects buildId in URL params and weapon data in request body.
+ */
 const updateBuildWeapons = async (req, res) => {
     const { buildId } = req.params;
     const weaponData = req.body;
@@ -30,6 +34,10 @@ const updateBuildWeapons = async (req, res) => {
     }
 };
 
+/**
+ * Retrieves all builds (with weapons) for a specific user.
+ * Expects userId in URL params.
+ */
 const getBuildsByUser = async (req, res) => {
     const userId = req.params.userId;
     try {
@@ -40,6 +48,12 @@ const getBuildsByUser = async (req, res) => {
     }
 };
 
+/**
+ * Retrieves public builds.
+ * Optional filters:
+ *  - character (via query string)
+ *  - sort by likes (via query string ?sort=likes)
+ */
 const getPublicBuilds = async (req, res) => {
     const character = req.query.character;
     const sort = req.query.sort === 'likes';
@@ -52,6 +66,10 @@ const getPublicBuilds = async (req, res) => {
     }
 };
 
+/**
+ * Increments the like count for a given build.
+ * Expects buildId in URL params.
+ */
 const likeBuild = async (req, res) => {
     try {
         const { buildId } = req.params;
@@ -61,6 +79,11 @@ const likeBuild = async (req, res) => {
         res.status(500).json({ message: 'Failed to like build' });
     }
 };
+
+/**
+ * Fetches a single build by ID.
+ * Only returns it if it's public.
+ */
 const getBuildById = async (req, res) => {
     try {
         const build = await buildModel.getBuildById(req.params.buildId);
@@ -73,6 +96,11 @@ const getBuildById = async (req, res) => {
     }
 };
 
+/**
+ * Shares a build (makes it public).
+ * Requires the build to belong to the logged-in user.
+ * Expects buildId in URL params and user ID from decoded token.
+ */
 const shareBuild = async (req, res) => {
     const buildId = req.params.buildId;
     const userId = req.user.id;
@@ -88,9 +116,7 @@ const shareBuild = async (req, res) => {
     }
 };
 
-
-
-
+// Export all controller methods for routing
 module.exports = {
     createBuild,
     updateBuildWeapons,
