@@ -1,17 +1,18 @@
-.page-container1 {
+.page-container-build {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    background-color: #0f0f11;
-    height: 100%;
-    color: white;
-    padding: 35px 30px;
-    position: relative;
-    font-family: sans-serif;
-
+    justify-content: center;
+    margin-top: 35px;
+    margin-bottom: 20vh;
 }
 
+.create-build-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .create-build-header {
     font-size: 2.5rem;
     margin-bottom: 20px;

@@ -62,9 +62,6 @@ function MyBuildsPage() {
                     </div>
                 )}
             </div>
-
-            {/* Reusable footer component */}
-            <Footer />
         </div>
     );
 }

@@ -88,7 +88,7 @@ function BrowseBuildsPage() {
     };
 
     return (
-        <div className="page-container">
+        <div className="page-container-browse">
             <h2>Browse Builds</h2>
 
             {/* Filtering and Sorting Controls */}
@@ -139,8 +139,6 @@ function BrowseBuildsPage() {
                     ))}
                 </div>
             )}
-
-            <Footer />
         </div>
     );
 }

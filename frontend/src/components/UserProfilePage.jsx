@@ -100,7 +100,7 @@ function UserProfilePage() {
     };
 
     return (
-        <div className="page-container">
+        <div className="page-container-profile">
             <div className="profile-wrapper">
                 {/* Logout button in top-right */}
                 <img
@@ -185,8 +185,6 @@ function UserProfilePage() {
                     </div>
                 )}
             </div>
-
-            <Footer />
         </div>
     );
 }

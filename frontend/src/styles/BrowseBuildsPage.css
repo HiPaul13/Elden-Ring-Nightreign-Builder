@@ -1,6 +1,6 @@
 
 
-.page-container {
+.page-container-browse {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,6 +8,7 @@
     width: 100%;
     height: 100%;
     margin-top: 35px;
+    margin-bottom: 20vh;
 }
 
 

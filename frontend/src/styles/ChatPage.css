@@ -1,3 +1,11 @@
+.page-container-chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20vh;
+}
+
 .chat-wrapper {
     background-color: #0f0f11;
     color: white;
@@ -7,7 +15,7 @@
     font-family: sans-serif;
     margin-top: 15px;
     height: 100%;
-    margin-bottom: 20vh;
+    padding-bottom: 40px;
 }
 
 .chat-logo {

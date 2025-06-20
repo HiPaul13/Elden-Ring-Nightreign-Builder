@@ -1,20 +1,20 @@
 .footer {
-    margin-top: 4vh;
     background-color: #333;
     color: white;
     padding: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     font-size: 0.9rem;
     flex-wrap: wrap;
     text-align: center;
-    width: 230%;
-    height: 10vh;
+    box-sizing: border-box;
+    width: 100vw; /* full viewport width */
+    margin-left: calc(-50vw + 50%);
 }
 
 .footer-column {
-    flex: 1;
+    margin: 0 20px;
     min-width: 150px;
 }
 

@@ -76,61 +76,62 @@ function ChatPage() {
     };
 
     return (
-        <div className="page-container">
-            <div className="chat-wrapper">
-                <h2 className="chat-title">Chatroom</h2>
-                <div className="chat-layout">
+            <div className="page-container-chat">
+                <div className="chat-wrapper">
+                    <h2 className="chat-title">Chatroom</h2>
+                    <div className="chat-layout">
 
-                    {/* Left side: message area */}
-                    <div className="chat-box">
-                        <div className="chat-header">{room}</div>
-                        <div className="chat-log">
-                            {messages.map((msg, i) => (
-                                <div
-                                    key={i}
-                                    className={`chat-bubble ${msg.user === username ? 'mine' : 'theirs'}`}
+                        {/* Left side: message area */}
+                        <div className="chat-box">
+                            <div className="chat-header">{room}</div>
+                            <div className="chat-log">
+                                {messages.map((msg, i) => (
+                                    <div
+                                        key={i}
+                                        className={`chat-bubble ${msg.user === username ? 'mine' : 'theirs'}`}
+                                    >
+                                        <div className="chat-user">{msg.user}</div>
+                                        <div>{msg.message}</div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Input row */}
+                            <div className="chat-input-row">
+                                <input
+                                    type="text"
+                                    value={input}
+                                    onChange={(e) => setInput(e.target.value)}
+                                    placeholder="Type a message..."
+                                    onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+                                />
+                                <button onClick={sendMessage} disabled={!connected}>Send</button>
+                            </div>
+                        </div>
+
+                        {/* Right side: room list */}
+                        <div className="chat-room-list">
+                            <h3>Chatrooms</h3>
+                            {rooms.map((r) => (
+                                <button
+                                    key={r}
+                                    className={`room-button ${r === room ? 'active' : ''}`}
+                                    onClick={() => {
+                                        setMessages([]); // Clear messages when switching rooms
+                                        setRoom(r);       // Change current room
+                                    }}
                                 >
-                                    <div className="chat-user">{msg.user}</div>
-                                    <div>{msg.message}</div>
-                                </div>
+                                    {r}
+                                </button>
                             ))}
                         </div>
-
-                        {/* Input row */}
-                        <div className="chat-input-row">
-                            <input
-                                type="text"
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
-                                placeholder="Type a message..."
-                                onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-                            />
-                            <button onClick={sendMessage} disabled={!connected}>Send</button>
-                        </div>
-                    </div>
-
-                    {/* Right side: room list */}
-                    <div className="chat-room-list">
-                        <h3>Chatrooms</h3>
-                        {rooms.map((r) => (
-                            <button
-                                key={r}
-                                className={`room-button ${r === room ? 'active' : ''}`}
-                                onClick={() => {
-                                    setMessages([]); // Clear messages when switching rooms
-                                    setRoom(r);       // Change current room
-                                }}
-                            >
-                                {r}
-                            </button>
-                        ))}
                     </div>
                 </div>
             </div>
 
-            {/* Reusable footer */}
-            <Footer />
-        </div>
+
+
+
     );
 }
 

@@ -13,42 +13,47 @@ import BuildDetailPage from './components/BuildDetailPage';
 import UserProfilePage from "./components/UserProfilePage.jsx";
 import RegisterPage from "./components/ReigisterPage.jsx";
 import ChatPage from './components/ChatPage';
+import Footer from "./components/Footer.jsx";
 
 function App() {
     return (
+    <div className="page-container-app">
+        <Routes>
 
-            <Routes>
-
-                {/* Public Routes */}
-                <Route path="/" element={<LoginPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
+            {/* Public Routes */}
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
 
 
-                {/* Protected Routes - wrapped in Layout with nav */}
-                <Route
-                    path="/"
-                    element={
-                        <ProtectedRoute>
-                            <Layout />
-                        </ProtectedRoute>
-                    }
-                >
-                    <Route path="/builds/:buildId" element={<BuildDetailPage />} />
-                    <Route path="browse" element={<BrowseBuildsPage />} />
-                    <Route path="weapons" element={<WeaponsPage />} />
-                    <Route path="/chat" element={<ChatPage />} />
-                    <Route path="users/:id" element={<UserProfilePage />} />
-                    <Route path="users/:id/myBuilds" element={<MyBuildsPage />} />
-                    <Route path="users/:id/myBuilds/:buildId" element={<MyBuildDetailPage />} />
-                    <Route path="users/:id/createBuild" element={<NavigateToNewBuild />} />
-                    <Route path="users/:id/createBuild/:buildId" element={<CreateWeaponBuild />} />
-                    <Route path="users/:id/creatingBuild/:buildId/weapons" element={<SelectWeaponPage />} />
-                </Route>
+            {/* Protected Routes - wrapped in Layout with nav */}
+            <Route
+                path="/"
+                element={
+                    <ProtectedRoute>
+                        <Layout />
+                    </ProtectedRoute>
+                }
+            >
+                <Route path="/builds/:buildId" element={<BuildDetailPage />} />
+                <Route path="browse" element={<BrowseBuildsPage />} />
+                <Route path="weapons" element={<WeaponsPage />} />
+                <Route path="/chat" element={<ChatPage />} />
+                <Route path="users/:id" element={<UserProfilePage />} />
+                <Route path="users/:id/myBuilds" element={<MyBuildsPage />} />
+                <Route path="users/:id/myBuilds/:buildId" element={<MyBuildDetailPage />} />
+                <Route path="users/:id/createBuild" element={<NavigateToNewBuild />} />
+                <Route path="users/:id/createBuild/:buildId" element={<CreateWeaponBuild />} />
+                <Route path="users/:id/creatingBuild/:buildId/weapons" element={<SelectWeaponPage />} />
+            </Route>
 
-                {/* Fallback */}
-                <Route path="*" element={<Navigate to="/login" />} />
-            </Routes>
+            {/* Fallback */}
+            <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+
+        <Footer />
+    </div>
+
     );
 }
 
