@@ -1,3 +1,7 @@
+Project explanation: This is a website for the recently published game "Elden Ring Nightreign", here you can create Builds, share builds, browse for builds and create your own Profile with your builds.
+A Build normally consists of 6 Weapons and a Character, you can also like builds of other users.
+
+
 Tue.10.Juni:
 
 What I did: finished Prototype and setup the db.
@@ -53,3 +57,24 @@ What I did: Implemented the Chat feature and restyled the Userprofile and Browse
 Biggest Learning: Structure your css good.
 Biggest Failure: Had a lot of css bugs, still not perfect.
 Notes For The next Day: Implement footer, get it on CampusCloud
+
+
+Final Personal Reflection: 
+
+🌟 What worked well for you during the CCL?
+I think it worked well that you learned a lot about the structure of such projects, how db, backend and frontend communicate. It also worked well that i managed to use an external api to fetch data (weapons) inside my project.
+
+🧩 What were your biggest challenges or struggles?
+The biggest challenge was to connect frontend and backend and the styling of my pages, as i mentioned i had a hard time fixing all the files that had similar className names.
+
+🔍 What did you manage to understand better during these two weeks?
+Connection between frontend backend and db. I would also say that i got better at CSS now bc i had so much struggles there.
+
+🕳️ What do you still struggle with?
+Writing Code only out of my head is still a thing where i struggle a bit, but it got a lot better throughout the 2 weeks of the CCL.
+
+🚀 Looking back to the start of the semester: Did you think you’d be able to build the app you delivered? Why or why not?
+
+I think i would be able to do it but if i learn it all myself but it would be very hard,
+i think the way we approached this project and how all is structured was very good and it helped a lot to understand the things and build a website/app like this.
+

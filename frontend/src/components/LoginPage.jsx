@@ -14,8 +14,8 @@ import '../styles/LoginPage.css';
  */
 function LoginPage() {
     // State for email, password, and error messages
-    const [email, setEmail] = useState('admin@nightreign.com'); // Default for testing
-    const [password, setPassword] = useState('admin');
+    const [email, setEmail] = useState(''); // Default for testing
+    const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState('');
 
     // Hook for navigating programmatically
