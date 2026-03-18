@@ -1,15 +1,16 @@
 .login-page {
-    background-image: url('/images/backgrounds/LoginBackground.png'); /* Replace with your real path */
+    background-image: url('/images/backgrounds/LoginBackground.png');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     position: relative;
     align-items: center;
     justify-content: center;
     font-family: sans-serif;
-    width: 180vh;
-    height: 120vh;
+    width: 100%;
+    min-height: 100vh;
 }
 
 .login-logo {
@@ -59,7 +60,7 @@
 }
 
 .login-btn {
-    background-color: #2bd0c8;
+    background-color: #0abeb5;
     color: white;
     width: 80%;
 }

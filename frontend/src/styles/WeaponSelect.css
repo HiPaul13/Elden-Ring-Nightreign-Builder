@@ -6,6 +6,17 @@
     justify-content: center;
 }
 
+.page-container-selectweapon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 35px;
+    margin-bottom: 20vh;
+    padding-right: 50vh;
+    padding-left: 50vh;
+}
+
 .filter-bar input,
 .filter-bar select {
     padding: 10px;

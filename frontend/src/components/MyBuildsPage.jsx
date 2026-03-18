@@ -41,7 +41,7 @@ function MyBuildsPage() {
     if (error) return <p style={{ color: 'red' }}>{error}</p>;
 
     return (
-        <div className="page-container">
+        <div className="page-container-mybuildspage">
             <div className="my-builds-wrapper">
                 <h2>My Weapon Builds</h2>
 

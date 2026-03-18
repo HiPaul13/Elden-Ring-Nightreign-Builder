@@ -3,15 +3,16 @@
 .detail-page-wrapper {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 3rem 2rem;
+    padding: 5rem 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 7rem;
 }
 
 .detail-page-wrapper h2 {
     font-size: 2rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     color: white;
     text-align: center;
 }

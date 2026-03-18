@@ -71,7 +71,7 @@ function SelectWeaponPage() {
     if (error) return <p style={{ color: 'red' }}>{error}</p>;
 
     return (
-        <div className="page-container">
+        <div className="page-container-selectweapon">
             <h2>Select a Weapon</h2>
 
             {/* Filter controls */}

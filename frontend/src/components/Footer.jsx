@@ -20,7 +20,7 @@ function Footer() {
 
             {/* Right column with external or contact links */}
             <div className="footer-column">
-                <a href="https://git.nwt.fhstp.ac.at/ccl2_hitzl_paul_cc241055/ss2025_ccl_cc241055">Github</a> / <a href="/contact">Contact</a>
+                <a href="https://github.com/HiPaul13">Github</a> / <a href="/contact">Contact</a>
             </div>
         </footer>
     );
