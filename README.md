@@ -3,7 +3,6 @@
 ## Overview
 A full-stack web application inspired by *Elden Ring Nightreign* that allows users to create, share, and explore custom weapon builds. This project was developed during an intensive two-week Coding Lab in the second semester of the Bachelor's program at UAS St. Pölten (June 2025), focusing on full-stack web development.
 
-This 
 
 Users can:
 - Create builds with up to 6 weapons and a character
