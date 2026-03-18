@@ -46,6 +46,7 @@ This project demonstrates a complete full-stack architecture with authentication
 
 ## 🧠 Architecture
 
+```text
 /backend
 ├── controllers
 ├── models
@@ -57,6 +58,7 @@ This project demonstrates a complete full-stack architecture with authentication
 ├── src/components
 ├── src/services
 └── src/styles
+```
 
 The app follows a classic MVC-inspired structure with clear separation between frontend, backend, and database logic.
 
@@ -115,7 +117,7 @@ Test account:
 - Email: admin@nightreign.com 
 - Password: admin
 
-# Usage FLow
+# Usage Flow
 
 - Register or login
 - Browse builds from other users
